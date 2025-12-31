@@ -1,70 +1,31 @@
 import os
+import json
 
-# CONFIGURATION
-# ------------------------------------------
-GALLERY_FOLDER = 'images/gallery'  # Folder containing images
-HTML_FILE = 'gallery.html'         # The HTML file to update
-# ------------------------------------------
+# Configuration
+IMAGE_FOLDER = 'images/gallery'     # Where your images live
+OUTPUT_FILE = 'gallery_data.json'   # The file JS will read
+VALID_EXTENSIONS = ('.png', '.jpg', '.jpeg', '.gif', '.webp')
 
-def generate_html():
-    # 1. Get all images from the folder
-    try:
-        files = os.listdir(GALLERY_FOLDER)
-    except FileNotFoundError:
-        print(f"Error: Could not find folder '{GALLERY_FOLDER}'")
+def update_json():
+    # 1. Check if folder exists
+    if not os.path.exists(IMAGE_FOLDER):
+        print(f"Error: Folder '{IMAGE_FOLDER}' not found.")
         return
 
-    # Filter for image files only
-    images = [f for f in files if f.lower().endswith(('.png', '.jpg', '.jpeg', '.webp', '.gif'))]
-    images.sort() # Sort alphabetically
-
-    print(f"Found {len(images)} images in {GALLERY_FOLDER}...")
-
-    # 2. Build the HTML string
-    html_content = ""
+    # 2. Get all valid image files
+    images = []
+    for filename in os.listdir(IMAGE_FOLDER):
+        if filename.lower().endswith(VALID_EXTENSIONS):
+            images.append(filename)
     
-    for img in images:
-        # Create a "pretty" caption
-        caption = os.path.splitext(img)[0]
-        caption = caption.replace("-", " ").replace("_", " ").title()
+    # Optional: Sort them alphabetically or by date
+    images.sort() 
 
-        # HTML Block for Flexbox Gallery
-        # We put the img inside a div. the CSS handles the sizing.
-        html_block = f"""
-        <div class="gallery-item">
-            <img loading="lazy" src="{GALLERY_FOLDER}/{img}" alt="{caption}" />
-            <div class="caption">{caption}</div>
-        </div>"""
-        
-        html_content += html_block
+    # 3. Write list to JSON
+    with open(OUTPUT_FILE, 'w') as f:
+        json.dump(images, f, indent=4)
 
-    # 3. Read the existing HTML file
-    try:
-        with open(HTML_FILE, 'r', encoding='utf-8') as file:
-            content = file.read()
-    except FileNotFoundError:
-        print(f"Error: Could not find '{HTML_FILE}'. Please create it first.")
-        return
-
-    # 4. Inject the new HTML between the markers
-    start_marker = ''
-    end_marker = ''
-
-    if start_marker not in content or end_marker not in content:
-        print(f"Error: Could not find markers {start_marker} and {end_marker} in {HTML_FILE}.")
-        return
-
-    # Split the file and rebuild it
-    pre_content = content.split(start_marker)[0]
-    post_content = content.split(end_marker)[1]
-
-    new_full_content = pre_content + start_marker + "\n" + html_content + "\n    " + end_marker + post_content
-
-    # 5. Save the file
-    with open(HTML_FILE, 'w', encoding='utf-8') as file:
-        file.write(new_full_content)
-
-    print("Success! gallery.html has been updated.")
+    print(f"Success! Found {len(images)} images. Saved to {OUTPUT_FILE}.")
 
 if __name__ == "__main__":
-    generate_html()
+    update_json()
