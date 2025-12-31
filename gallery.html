@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Gallery — Britney Button Events</title>
+    <meta name="description" content="View our portfolio of elegant weddings, corporate galas, and exquisite catering setups in Waterloo, ON.">
+    
+    <link rel="stylesheet" href="main.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        /* =========================================
+           PAGE SPECIFIC STYLES (From Hyrox Format)
+           ========================================= */
+        
+        /* Adjusting top padding to account for fixed header */
+        body {
+            padding-top: var(--nav-height);
+        }
+
+        .page-header {
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .category-title {
+            font-family: var(--font-heading);
+            font-size: 1.8rem;
+            margin-top: 60px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid var(--color-border);
+            display: inline-block;
+        }
+
+        /* Portfolio-style Lightbox CSS (Identical to Hyrox page) */
+        .lightbox { 
+            position: fixed; 
+            inset: 0; 
+            display: none; 
+            align-items: center; 
+            justify-content: center; 
+            background: rgba(0,0,0,0.95); 
+            z-index: 9999; 
+        }
+        .lightbox.open { display: flex; }
+        
+        .lightbox-content { 
+            position: relative; 
+            max-width: 95vw; 
+            max-height: 92vh; 
+            width: min(1100px, 95vw); 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+        }
+        
+        .lightbox img, .lightbox video { 
+            max-width: 100%; 
+            max-height: 92vh; 
+            border-radius: 4px; 
+            outline: 1px solid rgba(255,255,255,0.15); 
+            background: #000; 
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+        
+        .lightbox .close, .lightbox .prev, .lightbox .next { 
+            position: absolute; 
+            top: 50%; 
+            transform: translateY(-50%); 
+            border: 0; 
+            background: rgba(255,255,255,0.1); 
+            color: #fff; 
+            padding: 1rem 1.2rem; 
+            border-radius: 50%; 
+            cursor: pointer; 
+            font-size: 1.2rem;
+            transition: background 0.2s ease;
+        }
+        
+        .lightbox .close:hover, .lightbox .prev:hover, .lightbox .next:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .lightbox .close { top: 30px; right: 30px; transform: none; padding: 0.5rem 0.8rem; border-radius: 8px; }
+        .lightbox .prev { left: 20px; } 
+        .lightbox .next { right: 20px; }
+        
+        .caption { 
+            position: absolute;
+            bottom: -40px;
+            left: 0;
+            width: 100%;
+            text-align: center; 
+            color: #f0f0f0; 
+            font-size: 1rem; 
+            font-family: var(--font-body);
+            letter-spacing: 0.5px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="main-header">
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">Britney Button <span>Events</span></a>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html#about">About</a></li>
+                    <li><a href="index.html#corporate">Corporate</a></li>
+                    <li><a href="index.html#weddings">Weddings</a></li>
+                    <li><a href="index.html#social">Social</a></li>
+                    <li><a href="index.html#menus">Menus</a></li>
+                    <li><a href="index.html#contact" class="btn-nav">Start Planning</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <section class="section">
+        <div class="container">
+            
+            <div class="page-header">
+                <h1 class="page-title">Our Portfolio</h1>
+                <p class="page-subtitle" style="color: var(--text-light); max-width: 600px; margin: 0 auto;">
+                    Explore our collection of memorable moments, from intimate wedding details to large-scale corporate executions.
+                </p>
+            </div>
+
+            <article class="job-block" style="border-top: none; margin-top: 0;">
+                
+                <h2 class="category-title">Weddings & Social</h2>
+                <div class="gallery gallery--strip" data-gallery="weddings">
+                    <figure data-type="image" data-src="https://images.unsplash.com/photo-1519225468359-2996bc01c5dc?q=80&w=2070&auto=format&fit=crop">
+                        <img loading="lazy" src="https://images.unsplash.com/photo-1519225468359-2996bc01c5dc?q=80&w=600&auto=format&fit=crop" alt="Elegant wedding table setting" />
+                        <figcaption>Elegant Table Settings</figcaption>
+                    </figure>
+                    <figure data-type="image" data-src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=2069&auto=format&fit=crop">
+                        <img loading="lazy" src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=600&auto=format&fit=crop" alt="Outdoor wedding ceremony" />
+                        <figcaption>Garden Ceremony</figcaption>
+                    </figure>
+                    <figure data-type="image" data-src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=2070&auto=format&fit=crop">
+                        <img loading="lazy" src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=600&auto=format&fit=crop" alt="Wedding details and rings" />
+                        <figcaption>Fine Details</figcaption>
+                    </figure>
+                    <figure data-type="image" data-src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?q=80&w=2070&auto=format&fit=crop">
+                        <img loading="lazy" src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?q=80&w=600&auto=format&fit=crop" alt="Wedding reception toast" />
+                        <figcaption>Reception Moments</figcaption>
+                    </figure>
+                </div>
+
+                <h2 class="category-title">Corporate & Catering</h2>
+                <div class="gallery gallery--strip" data-gallery="corporate">
+                    <figure data-type="image" data-src="https://images.unsplash.com/photo-1555244162-803834f70033?q=80&w=2070&auto=format&fit=crop">
+                        <img loading="lazy" src="https://images.unsplash.com/photo-1555244162-803834f70033?q=80&w=600&auto=format&fit=crop" alt="Corporate catering buffet" />
+                        <figcaption>Corporate Buffet</figcaption>
+                    </figure>
+                    <figure data-type="image" data-src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=2070&auto=format&fit=crop">
+                        <img loading="lazy" src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=600&auto=format&fit=crop" alt="Plated gourmet dish" />
+                        <figcaption>Plated Service</figcaption>
+                    </figure>
+                    <figure data-type="image" data-src="https://images.unsplash.com/photo-1560523160-754a9e25c68f?q=80&w=2036&auto=format&fit=crop">
+                        <img loading="lazy" src="https://images.unsplash.com/photo-1560523160-754a9e25c68f?q=80&w=600&auto=format&fit=crop" alt="Professional staff serving" />
+                        <figcaption>Professional Service</figcaption>
+                    </figure>
+                </div>
+
+            </article>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Britney Button Events</h4>
+                    <p>Your premier catering partner in Waterloo, Kitchener, and Cambridge.</p>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/britneybuttonevents/" target="_blank" rel="noopener">Instagram</a>
+                        <a href="#" target="_blank" rel="noopener">Facebook</a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <p>123 Event Avenue<br>Waterloo, ON, Canada</p>
+                    <p>
+                        <a href="mailto:hello@britneybuttonevents.ca">hello@britneybuttonevents.ca</a><br>
+                        <a href="tel:+15551234567">(555) 123-4567</a>
+                    </p>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html#corporate">Corporate Menu</a></li>
+                        <li><a href="index.html#weddings">Wedding Packages</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Britney Button Events. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="lightbox" id="lightbox" aria-modal="true" role="dialog">
+        <div class="lightbox-content" id="lbContent" tabindex="0"></div>
+        <button class="close" id="lbClose" aria-label="Close lightbox">✕</button>
+        <button class="prev" id="lbPrev" aria-label="Previous image">❮</button>
+        <button class="next" id="lbNext" aria-label="Next image">❯</button>
+        <p class="caption" id="lbCaption"></p>
+    </div>
+
+    <script>
+        (function(){
+            // Select all gallery containers on the page
+            const galleries = Array.from(document.querySelectorAll('.gallery'));
+            const lightbox = document.getElementById('lightbox');
+            const lbContent = document.getElementById('lbContent');
+            const lbCaption = document.getElementById('lbCaption');
+            
+            // Collect all media items into a single flat array for navigation
+            const media = [];
+
+            galleries.forEach(g => {
+                g.querySelectorAll('figure').forEach(t => {
+                    // Get the high-res source from data-src
+                    const src = t.dataset.src || t.querySelector('img,video')?.getAttribute('src');
+                    // Get caption from figcaption
+                    const caption = t.querySelector('figcaption')?.textContent || "";
+                    
+                    if(src) {
+                        media.push({
+                            el: t,
+                            type: t.dataset.type || (t.querySelector('video') ? 'video' : 'image'),
+                            src: src,
+                            caption: caption
+                        });
+                    }
+                });
+            });
+
+            let currentIndex = -1;
+
+            function openAt(i){
+                currentIndex = i;
+                const item = media[i];
+                
+                // Inject content based on type
+                if (item.type === 'video') {
+                    lbContent.innerHTML = `<video controls autoplay playsinline src="${item.src}"></video>`;
+                } else {
+                    lbContent.innerHTML = `<img src="${item.src}" alt="${item.caption}">`;
+                }
+                
+                lbCaption.textContent = item.caption;
+                lightbox.classList.add('open');
+                document.body.style.overflow = 'hidden'; // Prevent background scrolling
+            }
+
+            // Bind click events to thumbnails
+            media.forEach((m, idx) => {
+                m.el.style.cursor = 'zoom-in';
+                m.el.onclick = () => openAt(idx);
+            });
+
+            // Close button
+            document.getElementById('lbClose').onclick = () => { 
+                lightbox.classList.remove('open'); 
+                document.body.style.overflow = ''; 
+                lbContent.innerHTML = ''; 
+            };
+
+            // Navigation buttons
+            document.getElementById('lbPrev').onclick = (e) => {
+                e.stopPropagation();
+                openAt((currentIndex - 1 + media.length) % media.length);
+            };
+            
+            document.getElementById('lbNext').onclick = (e) => {
+                e.stopPropagation();
+                openAt((currentIndex + 1) % media.length);
+            };
+
+            // Close on background click
+            lightbox.onclick = (e) => {
+                if(e.target === lightbox || e.target === lbContent) {
+                    lightbox.classList.remove('open');
+                    document.body.style.overflow = '';
+                    lbContent.innerHTML = '';
+                }
+            };
+            
+            // Keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                if (!lightbox.classList.contains('open')) return;
+                if (e.key === 'Escape') document.getElementById('lbClose').click();
+                if (e.key === 'ArrowLeft') document.getElementById('lbPrev').click();
+                if (e.key === 'ArrowRight') document.getElementById('lbNext').click();
+            });
+
+        })();
+    </script>
+</body>
+</html>
