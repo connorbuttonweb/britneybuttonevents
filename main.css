@@ -384,6 +384,49 @@ img {
 /* =========================================
    9. GALLERY SECTION
    ========================================= */
+/* ==========================================
+   GALLERY SECTION
+   ========================================== */
+
+/* Make each project act as a strip band */
+.job-block {
+  margin: 3rem auto;
+  padding: 2rem 0;
+  border-top: 1px solid rgba(0,0,0,0.06);
+}
+
+/* Responsive grid gallery similar to Pines */
+.gallery.gallery--strip {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 12px;
+  padding: 0.75rem 0;
+  width: 100%;
+}
+
+/* Each tile in the grid */
+.gallery.gallery--strip figure {
+  margin: 0;
+  position: relative;
+  cursor: zoom-in;
+  overflow: hidden;
+  aspect-ratio: 1 / 1;
+}
+
+/* Ensure edge-to-edge cropping */
+.gallery.gallery--strip img,
+.gallery.gallery--strip video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Optional: hide captions under tiles to match Pines' no-caption strips */
+.gallery.gallery--strip figcaption {
+  display: none;
+}
+
 .gallery-section {
     background-color: var(--white);
 }
@@ -397,19 +440,91 @@ img {
 .gallery-item {
     height: 250px;
     background-color: #ccc;
-    background-image: url('https://images.unsplash.com/photo-1555244162-803834f70033?q=80&w=2070&auto=format&fit=crop');
     background-size: cover;
     background-position: center;
     transition: opacity 0.3s;
     cursor: pointer;
 }
 
-.gallery-item:nth-child(2) { background-image: url('https://images.unsplash.com/photo-1464305795204-6f5bbfc7fb81?q=80&w=2070&auto=format&fit=crop'); }
-.gallery-item:nth-child(3) { background-image: url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=2070&auto=format&fit=crop'); }
-.gallery-item:nth-child(4) { background-image: url('https://images.unsplash.com/photo-1470337458703-46ad1756a187?q=80&w=2069&auto=format&fit=crop'); }
-
 .gallery-item:hover {
     opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+  .job-block {
+    margin: 2rem auto;
+    padding: 1.5rem 0;
+  }
+
+  .gallery.gallery--strip {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px;
+    padding: 0.5rem 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .gallery.gallery--strip {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 8px;
+  }
+
+  .job-block {
+    margin: 1.5rem auto;
+    padding: 1rem 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .gallery.gallery--strip {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 6px;
+  }
+}
+
+@media (max-width: 768px) {
+  .job-block {
+    margin: 2rem auto;
+    padding: 1.5rem 0;
+  }
+
+  .gallery.gallery--strip {
+    gap: 12px;
+    padding: 0.5rem 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;  /* Smooth scrolling on iOS */
+  }
+
+  .gallery.gallery--strip figure {
+    width: clamp(180px, 45vw, 350px);
+    height: 180px;
+    flex-basis: clamp(180px, 45vw, 350px);
+  }
+}
+
+@media (max-width: 640px) {
+  .gallery.gallery--strip {
+    gap: 10px;
+    scroll-padding: var(--mobile-padding);
+  }
+
+  .gallery.gallery--strip figure {
+    width: calc(100vw - 36px);
+    height: 150px;
+    flex-basis: calc(100vw - 36px);
+    max-width: 100%;
+  }
+
+  .job-block {
+    margin: 1.5rem auto;
+    padding: 1rem 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .gallery.gallery--strip figure {
+    height: 120px;
+  }
 }
 
 /* =========================================
