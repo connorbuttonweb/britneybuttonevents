@@ -29,38 +29,40 @@
             margin: 0 auto;
         }
 
-        /* Full width container */
+        /* Fluid container for edge-to-edge feel */
         .gallery-container-fluid {
             width: 100%;
-            padding: 0 10px;
+            padding: 0 15px;
             box-sizing: border-box;
-            margin-bottom: 40px;
+            margin-bottom: 60px;
         }
 
-        /* The Grid: Auto-fills screen with 350px minimum width tiles */
+        /* MASONRY LAYOUT (Pinterest Style)
+           Allows images to keep natural dimensions (Portrait/Landscape) 
+        */
         .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); 
-            gap: 10px; 
+            column-count: 4; 
+            column-gap: 15px; 
             width: 100%;
         }
 
-        /* Image Tiles */
         .gallery-item {
             position: relative;
             width: 100%;
-            aspect-ratio: 1 / 1; /* Forces square shape */
-            overflow: hidden;
+            margin-bottom: 15px; 
+            break-inside: avoid; /* Prevents splitting images across columns */
             cursor: zoom-in;
-            background-color: #f0f0f0;
+            display: inline-block; 
+            border-radius: 4px;
+            overflow: hidden;
+            background-color: #f4f4f4; /* Placeholder color while loading */
         }
 
         .gallery-item img {
             width: 100%;
-            height: 100%;
-            object-fit: cover; /* Fills square perfectly */
-            transition: transform 0.4s ease;
+            height: auto; 
             display: block;
+            transition: transform 0.4s ease;
         }
 
         .gallery-item:hover img {
@@ -68,20 +70,20 @@
         }
 
         .gallery-item figcaption {
-            display: none; /* Hides captions for clean look */
+            display: none; 
         }
 
-        /* Mobile Adjustments */
+        /* RESPONSIVE BREAKPOINTS */
+        @media (max-width: 1024px) {
+            .gallery-grid { column-count: 3; }
+        }
+
         @media (max-width: 768px) {
-            .gallery-grid {
-                grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); 
-                gap: 5px;
-            }
-            .gallery-container-fluid {
-                padding: 0 5px;
-            }
+            .gallery-grid { column-count: 2; column-gap: 10px; }
+            .gallery-item { margin-bottom: 10px; }
+            .gallery-container-fluid { padding: 0 10px; }
         }
-
+        
         /* Lightbox Styles */
         .lightbox { 
             position: fixed; inset: 0; display: none; align-items: center; justify-content: center; 
@@ -121,8 +123,8 @@
                     <li><a href="index.html#corporate">Corporate</a></li>
                     <li><a href="index.html#weddings">Weddings</a></li>
                     <li><a href="index.html#social">Social</a></li>
-                    <li><a href="index.html#menus">Menus</a></li>
                     <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="index.html#menus">Menus</a></li>
                     <li><a href="index.html#contact" class="btn-nav">Start Planning</a></li>
                 </ul>
             </nav>
@@ -144,8 +146,68 @@
     <div class="gallery-container-fluid">
         <div class="gallery-grid">
             
+            <figure class="gallery-item" data-type="image" data-src="images/gallery/britney-charcouterie.jpg">
+                <img loading="lazy" src="images/gallery/britney-charcouterie.jpg" alt="Britney Button with extensive holiday charcuterie board catering" />
+                <figcaption>Holiday Charcuterie Spread</figcaption>
+            </figure>
+
+            <figure class="gallery-item" data-type="image" data-src="images/gallery/charcouterie-board.jpg">
+                <img loading="lazy" src="images/gallery/charcouterie-board.jpg" alt="Gourmet charcuterie board with cheeses, figs, and meats" />
+                <figcaption>Gourmet Cheese Board</figcaption>
+            </figure>
+            
+            <figure class="gallery-item" data-type="image" data-src="images/gallery/food-catering.jpg">
+                <img loading="lazy" src="images/gallery/food-catering.jpg" alt="Fresh catering spread with focaccia, peach salad, and asparagus" />
+                <figcaption>Fresh Catering Spread</figcaption>
+            </figure>
+
+             <figure class="gallery-item" data-type="image" data-src="images/gallery/thanksgiving-catering.jpg">
+                <img loading="lazy" src="images/gallery/thanksgiving-catering.jpg" alt="Roast chicken catering dish with herbs" />
+                <figcaption>Roast Chicken Dinner</figcaption>
+            </figure>
+
+            <figure class="gallery-item" data-type="image" data-src="images/gallery/christmas-veggie-tray.jpg">
+                <img loading="lazy" src="images/gallery/christmas-veggie-tray.jpg" alt="Christmas themed vegetable catering tray" />
+                <figcaption>Holiday Vegetable Platter</figcaption>
+            </figure>
+
+            <figure class="gallery-item" data-type="image" data-src="images/gallery/veggie-tray.jpg">
+                <img loading="lazy" src="images/gallery/veggie-tray.jpg" alt="Fresh vegetable crudité platter close up" />
+                <figcaption>Fresh Crudité</figcaption>
+            </figure>
+
+            <figure class="gallery-item" data-type="image" data-src="images/gallery/bartending-bar.jpg">
+                <img loading="lazy" src="images/gallery/bartending-bar.jpg" alt="Cocktail making station with shaker and ingredients" />
+                <figcaption>Cocktail Station</figcaption>
+            </figure>
+
+            <figure class="gallery-item" data-type="image" data-src="images/gallery/martinit-orange.jpg">
+                <img loading="lazy" src="images/gallery/martinit-orange.jpg" alt="Orange martini cocktails with garnish" />
+                <figcaption>Signature Cocktails</figcaption>
+            </figure>
+
+            <figure class="gallery-item" data-type="image" data-src="images/gallery/bar-service-catering-toronto.jpg">
+                <img loading="lazy" src="images/gallery/bar-service-catering-toronto.jpg" alt="Halloween themed bar service with sangria" />
+                <figcaption>Themed Bar Service</figcaption>
+            </figure>
+
+            <figure class="gallery-item" data-type="image" data-src="images/gallery/bar-menu-toronto.jpg">
+                <img loading="lazy" src="images/gallery/bar-menu-toronto.jpg" alt="Custom bar menu with cupcakes and drinks" />
+                <figcaption>Custom Bar Menu</figcaption>
+            </figure>
+
+            <figure class="gallery-item" data-type="image" data-src="images/gallery/chilled-wine.jpg">
+                <img loading="lazy" src="images/gallery/chilled-wine.jpg" alt="Chilled wine and prosecco on ice" />
+                <figcaption>Chilled Wine Service</figcaption>
+            </figure>
+
+            <figure class="gallery-item" data-type="image" data-src="images/gallery/serving-glasses.jpg">
+                <img loading="lazy" src="images/gallery/serving-glasses.jpg" alt="Elegant wine glasses with decorative ribbons" />
+                <figcaption>Glassware Details</figcaption>
+            </figure>
+
             <figure class="gallery-item" data-type="image" data-src="images/gallery/party-catering-toronto.jpg">
-                <img loading="lazy" src="images/gallery/.jpg" alt="Outdoor party setup with lanterns and decorations" />
+                <img loading="lazy" src="images/gallery/party-catering-toronto.jpg" alt="Outdoor party setup with lanterns and decorations" />
                 <figcaption>Outdoor Party Setup</figcaption>
             </figure>
 
@@ -154,36 +216,20 @@
                 <figcaption>Social Dinner Party</figcaption>
             </figure>
 
+            <figure class="gallery-item" data-type="image" data-src="images/gallery/place-setting-catering-toronto.jpg">
+                <img loading="lazy" src="images/gallery/place-setting-catering-toronto.jpg" alt="Beautiful table place setting with strawberry cake" />
+                <figcaption>Table Setting & Cake</figcaption>
+            </figure>
+
             <figure class="gallery-item" data-type="image" data-src="images/gallery/wedding-cake-toronto.jpg">
                 <img loading="lazy" src="images/gallery/wedding-cake-toronto.jpg" alt="Elegant wedding cake with red heart details" />
                 <figcaption>Wedding Cake Detail</figcaption>
             </figure>
 
-            <figure class="gallery-item" data-type="image" data-src="images/gallery/thanksgiving-catering.jpg">
-                <img loading="lazy" src="images/gallery/thanksgiving-catering.jpg" alt="Thanksgiving catering spread with roast turkey" />
-                <figcaption>Thanksgiving Feast</figcaption>
+            <figure class="gallery-item" data-type="image" data-src="images/gallery/serving-christmas.jpg">
+                <img loading="lazy" src="images/gallery/serving-christmas.jpg" alt="Server plating turkey sliders at christmas event" />
+                <figcaption>Event Service</figcaption>
             </figure>
-
-            <figure class="gallery-item" data-type="image" data-src="images/gallery/place-setting-catering-toronto.jpg">
-                <img loading="lazy" src="images/gallery/place-setting-catering-toronto.jpg" alt="Beautiful table place setting with cake" />
-                <figcaption>Elegant Place Setting</figcaption>
-            </figure>
-
-            <figure class="gallery-item" data-type="image" data-src="images/gallery/bar-service-catering-toronto.jpg">
-                <img loading="lazy" src="images/gallery/bar-service-catering-toronto.jpg" alt="Bar service setup with sangria bowl" />
-                <figcaption>Bar & Sangria Service</figcaption>
-            </figure>
-
-            <figure class="gallery-item" data-type="image" data-src="images/gallery/bar-menu-toronto.jpg">
-                <img loading="lazy" src="images/gallery/bar-menu-toronto.jpg" alt="Custom bar menu with drinks and cupcakes" />
-                <figcaption>Custom Bar Menu</figcaption>
-            </figure>
-
-            <figure class="gallery-item" data-type="image" data-src="images/gallery/food-catering.jpg">
-                <img loading="lazy" src="images/gallery/food-catering.jpg" alt="Fresh catering spread with salads and appetizers" />
-                <figcaption>Fresh Catering Spread</figcaption>
-            </figure>
-
 
         </div>
     </div>
