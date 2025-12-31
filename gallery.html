@@ -14,30 +14,83 @@
 
     <style>
         /* =========================================
-           PAGE SPECIFIC STYLES (From Hyrox Format)
+           GALLERY SPECIFIC STYLES
            ========================================= */
         
-        /* Adjusting top padding to account for fixed header */
         body {
             padding-top: var(--nav-height);
+            overflow-x: hidden; /* Prevent horizontal scrollbars */
         }
 
         .page-header {
-            margin-bottom: 40px;
             text-align: center;
+            padding: 60px 20px 40px;
+            max-width: 800px;
+            margin: 0 auto;
         }
 
-        .category-title {
+        /* FULL WIDTH GRID CONTAINER 
+           This overrides the standard centered container to span the screen 
+        */
+        .gallery-container-fluid {
+            width: 100%;
+            padding: 0 10px; /* Small edge padding */
+            box-sizing: border-box;
+            margin-bottom: 40px;
+        }
+
+        .gallery-section-title {
             font-family: var(--font-heading);
-            font-size: 1.8rem;
-            margin-top: 60px;
-            margin-bottom: 20px;
+            font-size: 1.5rem;
+            margin: 40px 0 20px 15px; /* Align with grid padding */
             padding-bottom: 10px;
             border-bottom: 1px solid var(--color-border);
             display: inline-block;
         }
 
-        /* Portfolio-style Lightbox CSS (Identical to Hyrox page) */
+        /* THE GRID
+           auto-fill + minmax ensures images fill the row regardless of zoom 
+        */
+        .gallery-grid {
+            display: grid;
+            /* Images will never be smaller than 350px, but will stretch to fill space */
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); 
+            gap: 10px; /* Small gap between photos */
+            width: 100%;
+        }
+
+        /* IMAGE TILES */
+        .gallery-item {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1 / 1; /* Forces perfect square shape */
+            overflow: hidden;
+            cursor: zoom-in;
+            background-color: #f0f0f0;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensures image fills square without stretching */
+            transition: transform 0.4s ease;
+            display: block;
+        }
+
+        /* Hover Effect */
+        .gallery-item:hover img {
+            transform: scale(1.03);
+        }
+
+        /* HIDE CAPTIONS (Per Request) */
+        .gallery-item figcaption {
+            display: none;
+        }
+
+
+        /* =========================================
+           LIGHTBOX STYLES
+           ========================================= */
         .lightbox { 
             position: fixed; 
             inset: 0; 
@@ -101,6 +154,18 @@
             font-family: var(--font-body);
             letter-spacing: 0.5px;
         }
+
+        /* Mobile Adjustments for Grid */
+        @media (max-width: 768px) {
+            .gallery-grid {
+                /* Smaller tiles on mobile so you see 2 per row */
+                grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); 
+                gap: 5px;
+            }
+            .gallery-container-fluid {
+                padding: 0 5px;
+            }
+        }
     </style>
 </head>
 
@@ -117,8 +182,8 @@
                     <li><a href="index.html#corporate">Corporate</a></li>
                     <li><a href="index.html#weddings">Weddings</a></li>
                     <li><a href="index.html#social">Social</a></li>
-                    <li><a href="#gallery.html">Gallery</a></li>
                     <li><a href="index.html#menus">Menus</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
                     <li><a href="index.html#contact" class="btn-nav">Start Planning</a></li>
                 </ul>
             </nav>
@@ -130,57 +195,64 @@
         </div>
     </header>
 
-    <section class="section">
-        <div class="container">
-            
-            <div class="page-header">
-                <h1 class="page-title">Our Portfolio</h1>
-                <p class="page-subtitle" style="color: var(--text-light); max-width: 600px; margin: 0 auto;">
-                    Explore our collection of memorable moments, from intimate wedding details to large-scale corporate executions.
-                </p>
-            </div>
+    <div class="page-header">
+        <h1 class="page-title">Event Portfolio</h1>
+        <p class="page-subtitle" style="color: var(--text-light);">
+            A collection of our finest moments in catering and design.
+        </p>
+    </div>
 
-            <article class="job-block" style="border-top: none; margin-top: 0;">
-                
-                <h2 class="category-title">Weddings & Social</h2>
-                <div class="gallery gallery--strip" data-gallery="weddings">
-                    <figure data-type="image" data-src="https://images.unsplash.com/photo-1519225468359-2996bc01c5dc?q=80&w=2070&auto=format&fit=crop">
-                        <img loading="lazy" src="https://images.unsplash.com/photo-1519225468359-2996bc01c5dc?q=80&w=600&auto=format&fit=crop" alt="Elegant wedding table setting" />
-                        <figcaption>Elegant Table Settings</figcaption>
-                    </figure>
-                    <figure data-type="image" data-src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=2069&auto=format&fit=crop">
-                        <img loading="lazy" src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=600&auto=format&fit=crop" alt="Outdoor wedding ceremony" />
-                        <figcaption>Garden Ceremony</figcaption>
-                    </figure>
-                    <figure data-type="image" data-src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=2070&auto=format&fit=crop">
-                        <img loading="lazy" src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=600&auto=format&fit=crop" alt="Wedding details and rings" />
-                        <figcaption>Fine Details</figcaption>
-                    </figure>
-                    <figure data-type="image" data-src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?q=80&w=2070&auto=format&fit=crop">
-                        <img loading="lazy" src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?q=80&w=600&auto=format&fit=crop" alt="Wedding reception toast" />
-                        <figcaption>Reception Moments</figcaption>
-                    </figure>
-                </div>
-
-                <h2 class="category-title">Corporate & Catering</h2>
-                <div class="gallery gallery--strip" data-gallery="corporate">
-                    <figure data-type="image" data-src="https://images.unsplash.com/photo-1555244162-803834f70033?q=80&w=2070&auto=format&fit=crop">
-                        <img loading="lazy" src="https://images.unsplash.com/photo-1555244162-803834f70033?q=80&w=600&auto=format&fit=crop" alt="Corporate catering buffet" />
-                        <figcaption>Corporate Buffet</figcaption>
-                    </figure>
-                    <figure data-type="image" data-src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=2070&auto=format&fit=crop">
-                        <img loading="lazy" src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=600&auto=format&fit=crop" alt="Plated gourmet dish" />
-                        <figcaption>Plated Service</figcaption>
-                    </figure>
-                    <figure data-type="image" data-src="https://images.unsplash.com/photo-1560523160-754a9e25c68f?q=80&w=2036&auto=format&fit=crop">
-                        <img loading="lazy" src="https://images.unsplash.com/photo-1560523160-754a9e25c68f?q=80&w=600&auto=format&fit=crop" alt="Professional staff serving" />
-                        <figcaption>Professional Service</figcaption>
-                    </figure>
-                </div>
-
-            </article>
+    <div class="gallery-container-fluid">
+        
+        <h2 class="gallery-section-title">Corporate & Galas</h2>
+        <div class="gallery-grid" id="corporate-gallery">
+            <figure class="gallery-item" data-type="image" data-src="https://images.unsplash.com/photo-1555244162-803834f70033?q=80&w=2070&auto=format&fit=crop">
+                <img loading="lazy" src="https://images.unsplash.com/photo-1555244162-803834f70033?q=80&w=600&auto=format&fit=crop" alt="Corporate catering buffet" />
+                <figcaption>Corporate Buffet</figcaption>
+            </figure>
+            <figure class="gallery-item" data-type="image" data-src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=2070&auto=format&fit=crop">
+                <img loading="lazy" src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=600&auto=format&fit=crop" alt="Plated gourmet dish" />
+                <figcaption>Plated Service</figcaption>
+            </figure>
+            <figure class="gallery-item" data-type="image" data-src="https://images.unsplash.com/photo-1560523160-754a9e25c68f?q=80&w=2036&auto=format&fit=crop">
+                <img loading="lazy" src="https://images.unsplash.com/photo-1560523160-754a9e25c68f?q=80&w=600&auto=format&fit=crop" alt="Professional staff serving" />
+                <figcaption>Professional Service</figcaption>
+            </figure>
+            <figure class="gallery-item" data-type="image" data-src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?q=80&w=2098&auto=format&fit=crop">
+                <img loading="lazy" src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?q=80&w=600&auto=format&fit=crop" alt="Cocktail reception setup" />
+                <figcaption>Cocktail Reception</figcaption>
+            </figure>
         </div>
-    </section>
+
+        <h2 class="gallery-section-title">Weddings & Social</h2>
+        <div class="gallery-grid" id="wedding-gallery">
+            <figure class="gallery-item" data-type="image" data-src="https://images.unsplash.com/photo-1519225468359-2996bc01c5dc?q=80&w=2070&auto=format&fit=crop">
+                <img loading="lazy" src="https://images.unsplash.com/photo-1519225468359-2996bc01c5dc?q=80&w=600&auto=format&fit=crop" alt="Elegant wedding table setting" />
+                <figcaption>Elegant Table Settings</figcaption>
+            </figure>
+            <figure class="gallery-item" data-type="image" data-src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=2069&auto=format&fit=crop">
+                <img loading="lazy" src="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=600&auto=format&fit=crop" alt="Outdoor wedding ceremony" />
+                <figcaption>Garden Ceremony</figcaption>
+            </figure>
+            <figure class="gallery-item" data-type="image" data-src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=2070&auto=format&fit=crop">
+                <img loading="lazy" src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?q=80&w=600&auto=format&fit=crop" alt="Wedding details and rings" />
+                <figcaption>Fine Details</figcaption>
+            </figure>
+            <figure class="gallery-item" data-type="image" data-src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?q=80&w=2070&auto=format&fit=crop">
+                <img loading="lazy" src="https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?q=80&w=600&auto=format&fit=crop" alt="Wedding reception toast" />
+                <figcaption>Reception Moments</figcaption>
+            </figure>
+            <figure class="gallery-item" data-type="image" data-src="https://images.unsplash.com/photo-1507504031981-a236bbe08916?q=80&w=2070&auto=format&fit=crop">
+                <img loading="lazy" src="https://images.unsplash.com/photo-1507504031981-a236bbe08916?q=80&w=600&auto=format&fit=crop" alt="Table centerpiece with flowers" />
+                <figcaption>Floral Design</figcaption>
+            </figure>
+             <figure class="gallery-item" data-type="image" data-src="https://images.unsplash.com/photo-1520342868574-5fa3804e551c?q=80&w=1979&auto=format&fit=crop">
+                <img loading="lazy" src="https://images.unsplash.com/photo-1520342868574-5fa3804e551c?q=80&w=600&auto=format&fit=crop" alt="Wedding cake detail" />
+                <figcaption>Cake Design</figcaption>
+            </figure>
+        </div>
+
+    </div>
 
     <footer id="contact">
         <div class="container">
@@ -226,31 +298,27 @@
 
     <script>
         (function(){
-            // Select all gallery containers on the page
-            const galleries = Array.from(document.querySelectorAll('.gallery'));
+            // Target all .gallery-item figures inside .gallery-grid containers
+            const figures = Array.from(document.querySelectorAll('.gallery-grid figure.gallery-item'));
             const lightbox = document.getElementById('lightbox');
             const lbContent = document.getElementById('lbContent');
             const lbCaption = document.getElementById('lbCaption');
             
-            // Collect all media items into a single flat array for navigation
+            // Build the media array
             const media = [];
 
-            galleries.forEach(g => {
-                g.querySelectorAll('figure').forEach(t => {
-                    // Get the high-res source from data-src
-                    const src = t.dataset.src || t.querySelector('img,video')?.getAttribute('src');
-                    // Get caption from figcaption
-                    const caption = t.querySelector('figcaption')?.textContent || "";
-                    
-                    if(src) {
-                        media.push({
-                            el: t,
-                            type: t.dataset.type || (t.querySelector('video') ? 'video' : 'image'),
-                            src: src,
-                            caption: caption
-                        });
-                    }
-                });
+            figures.forEach(t => {
+                const src = t.dataset.src || t.querySelector('img,video')?.getAttribute('src');
+                const caption = t.querySelector('figcaption')?.textContent || "";
+                
+                if(src) {
+                    media.push({
+                        el: t,
+                        type: t.dataset.type || (t.querySelector('video') ? 'video' : 'image'),
+                        src: src,
+                        caption: caption
+                    });
+                }
             });
 
             let currentIndex = -1;
@@ -259,7 +327,6 @@
                 currentIndex = i;
                 const item = media[i];
                 
-                // Inject content based on type
                 if (item.type === 'video') {
                     lbContent.innerHTML = `<video controls autoplay playsinline src="${item.src}"></video>`;
                 } else {
@@ -268,23 +335,19 @@
                 
                 lbCaption.textContent = item.caption;
                 lightbox.classList.add('open');
-                document.body.style.overflow = 'hidden'; // Prevent background scrolling
+                document.body.style.overflow = 'hidden';
             }
 
-            // Bind click events to thumbnails
             media.forEach((m, idx) => {
-                m.el.style.cursor = 'zoom-in';
                 m.el.onclick = () => openAt(idx);
             });
 
-            // Close button
             document.getElementById('lbClose').onclick = () => { 
                 lightbox.classList.remove('open'); 
                 document.body.style.overflow = ''; 
                 lbContent.innerHTML = ''; 
             };
 
-            // Navigation buttons
             document.getElementById('lbPrev').onclick = (e) => {
                 e.stopPropagation();
                 openAt((currentIndex - 1 + media.length) % media.length);
@@ -295,7 +358,6 @@
                 openAt((currentIndex + 1) % media.length);
             };
 
-            // Close on background click
             lightbox.onclick = (e) => {
                 if(e.target === lightbox || e.target === lbContent) {
                     lightbox.classList.remove('open');
@@ -304,14 +366,12 @@
                 }
             };
             
-            // Keyboard navigation
             document.addEventListener('keydown', (e) => {
                 if (!lightbox.classList.contains('open')) return;
                 if (e.key === 'Escape') document.getElementById('lbClose').click();
                 if (e.key === 'ArrowLeft') document.getElementById('lbPrev').click();
                 if (e.key === 'ArrowRight') document.getElementById('lbNext').click();
             });
-
         })();
     </script>
 </body>
