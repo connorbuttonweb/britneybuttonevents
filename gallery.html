@@ -37,32 +37,56 @@
             margin-bottom: 60px;
         }
 
-        /* MASONRY LAYOUT (Pinterest Style)
-           Allows images to keep natural dimensions (Portrait/Landscape) 
+        /* JUSTIFIED FLEX LAYOUT (Replaces Masonry)
+           Images are arranged in rows with uniform height.
         */
         .gallery-grid {
-            column-count: 4; 
-            column-gap: 15px; 
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px; /* Space between images */
             width: 100%;
         }
 
+        /* This pseudo-element helps to prevent the items in the last row 
+           from stretching excessively to fill the full width. */
+        .gallery-grid::after {
+            content: '';
+            flex-grow: 999999999; /* Absorb remaining space */
+            min-width: 200px; /* Prevents it from being too small and ineffective */
+            height: 0;
+        }
+
         .gallery-item {
+            /* Flex properties allow items to grow and fill the row */
+            flex-grow: 1;
+            flex-shrink: 1;
+            flex-basis: auto; 
+            
+            /* Set a target height for the rows. This can be adjusted. */
+            height: 250px; 
+            
+            margin: 0; /* Margin is handled by the gap property */
             position: relative;
-            width: 100%;
-            margin-bottom: 15px; 
-            break-inside: avoid; /* Prevents splitting images across columns */
+            break-inside: avoid;
             cursor: zoom-in;
-            display: inline-block; 
             border-radius: 4px;
             overflow: hidden;
-            background-color: #f4f4f4; /* Placeholder color while loading */
+            background-color: #f4f4f4; /* Placeholder color */
             background: none !important;
         }
 
         .gallery-item img {
-            width: 100%;
-            height: auto; 
+            /* Force the image to match the container's height */
+            height: 100%;
+            /* Allow width to adjust proportionally */
+            width: auto;
+            /* Ensure the image fills the width of its container */
+            min-width: 100%;
             display: block;
+            /* 'cover' ensures the area is filled. It may cause slight cropping 
+               at the edges to maintain aspect ratio, which is standard for 
+               this type of justified layout. */
+            object-fit: cover; 
             transition: transform 0.4s ease;
         }
 
@@ -76,12 +100,19 @@
 
         /* RESPONSIVE BREAKPOINTS */
         @media (max-width: 1024px) {
-            .gallery-grid { column-count: 3; }
+            /* Adjust row height for smaller screens */
+            .gallery-item {
+                height: 200px; 
+            }
         }
 
         @media (max-width: 768px) {
-            .gallery-grid { column-count: 2; column-gap: 10px; }
-            .gallery-item { margin-bottom: 10px; }
+            .gallery-grid { 
+                gap: 10px; /* Smaller gap on mobile */
+            }
+            .gallery-item { 
+                height: 150px; /* Further reduce row height */
+            }
             .gallery-container-fluid { padding: 0 10px; }
         }
         
