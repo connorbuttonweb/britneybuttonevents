@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Gallery — Britney Button Events</title>
+    <meta name="description" content="View our portfolio of elegant weddings, corporate galas, and exquisite catering setups in Waterloo, ON.">
+    
+    <link rel="stylesheet" href="main.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <style>
+        /* =========================================
+           GALLERY SPECIFIC STYLES
+           ========================================= */
+        
+        body {
+            padding-top: var(--nav-height);
+            overflow-x: hidden;
+        }
+
+        .page-header {
+            text-align: center;
+            padding: 60px 20px 40px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* Fluid container for edge-to-edge feel */
+        .gallery-container-fluid {
+            width: 100%;
+            padding: 0 15px;
+            box-sizing: border-box;
+            margin-bottom: 60px;
+        }
+
+        /* MASONRY LAYOUT (Pinterest Style)
+           Allows images to keep natural dimensions (Portrait/Landscape) 
+        */
+        .gallery-grid {
+            column-count: 4; 
+            column-gap: 15px; 
+            width: 100%;
+        }
+
+        .gallery-item {
+            position: relative;
+            width: 100%;
+            margin-bottom: 15px; 
+            break-inside: avoid; /* Prevents splitting images across columns */
+            cursor: zoom-in;
+            display: inline-block; 
+            border-radius: 4px;
+            overflow: hidden;
+            background-color: #f4f4f4; /* Placeholder color while loading */
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: auto; 
+            display: block;
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.03);
+        }
+
+        .gallery-item figcaption {
+            display: none; 
+        }
+
+        /* RESPONSIVE BREAKPOINTS */
+        @media (max-width: 1024px) {
+            .gallery-grid { column-count: 3; }
+        }
+
+        @media (max-width: 768px) {
+            .gallery-grid { column-count: 2; column-gap: 10px; }
+            .gallery-item { margin-bottom: 10px; }
+            .gallery-container-fluid { padding: 0 10px; }
+        }
+        
+        /* Lightbox Styles */
+        .lightbox { 
+            position: fixed; inset: 0; display: none; align-items: center; justify-content: center; 
+            background: rgba(0,0,0,0.95); z-index: 9999; 
+        }
+        .lightbox.open { display: flex; }
+        .lightbox-content { 
+            position: relative; max-width: 95vw; max-height: 92vh; width: min(1100px, 95vw); 
+            display: flex; align-items: center; justify-content: center; 
+        }
+        .lightbox img { 
+            max-width: 100%; max-height: 92vh; border-radius: 4px; outline: 1px solid rgba(255,255,255,0.15); background: #000; 
+        }
+        .lightbox .close, .lightbox .prev, .lightbox .next { 
+            position: absolute; top: 50%; transform: translateY(-50%); border: 0; 
+            background: rgba(255,255,255,0.1); color: #fff; padding: 1rem 1.2rem; border-radius: 50%; cursor: pointer; font-size: 1.2rem; 
+        }
+        .lightbox .close { top: 30px; right: 30px; transform: none; padding: 0.5rem 0.8rem; border-radius: 8px; }
+        .lightbox .prev { left: 20px; } 
+        .lightbox .next { right: 20px; }
+        .caption { 
+            position: absolute; bottom: -40px; left: 0; width: 100%; text-align: center; color: #f0f0f0; font-size: 1rem; font-family: var(--font-body); 
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="main-header">
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">Britney Button <span>Events</span></a>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html#about">About</a></li>
+                    <li><a href="index.html#corporate">Corporate</a></li>
+                    <li><a href="index.html#weddings">Weddings</a></li>
+                    <li><a href="index.html#social">Social</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="index.html#menus">Menus</a></li>
+                    <li><a href="index.html#contact" class="btn-nav">Start Planning</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <div class="page-header">
+        <h1 class="page-title">Event Portfolio</h1>
+        <p class="page-subtitle" style="color: var(--text-light);">
+            A collection of our finest moments in catering and design.
+        </p>
+    </div>
+
+    <div class="gallery-container-fluid">
+        <div class="gallery-grid">
+            
+            <figure class="gallery-item" data-type="image" data-src="images/gallery/bar-menu-toronto.jpg">
+                <img loading="lazy" src="images/gallery/bar-menu-toronto.jpg" alt="Bar Menu Toronto" />
+                <figcaption>Bar Menu Toronto</figcaption>
+            </figure>
+
+            <figure class="gallery-item" data-type="image" data-src="images/gallery/bar-service-catering-toronto.jpg">
+                <img loading="lazy" src="images/gallery/bar-service-catering-toronto.jpg" alt="Bar Service Catering Toronto" />
+                <figcaption>Bar Service Catering Toronto</figcaption>
+            </figure>
+
+            <figure class="gallery-item" data-type="image" data-src="images/gallery/bartending-bar.jpg">
+                <img loading="lazy" src="images/gallery/bartending-bar.jpg" alt="Bartending Bar" />
+                <figcaption>Bartending Bar</figcaption>
+            </figure>
+
+            <figure class="gallery-item" data-type="image" data-src="images/gallery/britney-charcouterie.jpg">
+                <img loading="lazy" src="images/gallery/britney-charcouterie.jpg" alt="Britney Charcouterie" />
+                <figcaption>Britney Charcouterie</figcaption>
+            </figure>
+
+            <figure class="gallery-item" data-type="image" data-src="images/gallery/charcouterie-board.jpg">
+                <img loading="lazy" src="images/gallery/charcouterie-board.jpg" alt="Charcouterie Board" />
+                <figcaption>Charcouterie Board</figcaption>
+            </figure>
+
+            <figure class="gallery-item" data-type="image" data-src="images/gallery/chilled-wine.jpg">
+                <img loading="lazy" src="images/gallery/chilled-wine.jpg" alt="Chilled Wine" />
+                <figcaption>Chilled Wine</figcaption>
+            </figure>
+
+            <figure class="gallery-item" data-type="image" data-src="images/gallery/christmas-veggie-tray.jpg">
+                <img loading="lazy" src="images/gallery/christmas-veggie-tray.jpg" alt="Christmas Veggie Tray" />
+                <figcaption>Christmas Veggie Tray</figcaption>
+            </figure>
+
+            <figure class="gallery-item" data-type="image" data-src="images/gallery/food-catering.jpg">
+                <img loading="lazy" src="images/gallery/food-catering.jpg" alt="Food Catering" />
+                <figcaption>Food Catering</figcaption>
+            </figure>
+
+            <figure class="gallery-item" data-type="image" data-src="images/gallery/martinit-orange.jpg">
+                <img loading="lazy" src="images/gallery/martinit-orange.jpg" alt="Martinit Orange" />
+                <figcaption>Martinit Orange</figcaption>
+            </figure>
+
+            <figure class="gallery-item" data-type="image" data-src="images/gallery/party-catering-toronto.jpg">
+                <img loading="lazy" src="images/gallery/party-catering-toronto.jpg" alt="Party Catering Toronto" />
+                <figcaption>Party Catering Toronto</figcaption>
+            </figure>
+
+            <figure class="gallery-item" data-type="image" data-src="images/gallery/place-setting-catering-toronto.jpg">
+                <img loading="lazy" src="images/gallery/place-setting-catering-toronto.jpg" alt="Place Setting Catering Toronto" />
+                <figcaption>Place Setting Catering Toronto</figcaption>
+            </figure>
+
+            <figure class="gallery-item" data-type="image" data-src="images/gallery/serving-christmas.jpg">
+                <img loading="lazy" src="images/gallery/serving-christmas.jpg" alt="Serving Christmas" />
+                <figcaption>Serving Christmas</figcaption>
+            </figure>
+
+            <figure class="gallery-item" data-type="image" data-src="images/gallery/serving-glasses.jpg">
+                <img loading="lazy" src="images/gallery/serving-glasses.jpg" alt="Serving Glasses" />
+                <figcaption>Serving Glasses</figcaption>
+            </figure>
+
+            <figure class="gallery-item" data-type="image" data-src="images/gallery/thanksgiving-catering.jpg">
+                <img loading="lazy" src="images/gallery/thanksgiving-catering.jpg" alt="Thanksgiving Catering" />
+                <figcaption>Thanksgiving Catering</figcaption>
+            </figure>
+
+            <figure class="gallery-item" data-type="image" data-src="images/gallery/veggie-tray.jpg">
+                <img loading="lazy" src="images/gallery/veggie-tray.jpg" alt="Veggie Tray" />
+                <figcaption>Veggie Tray</figcaption>
+            </figure>
+
+            <figure class="gallery-item" data-type="image" data-src="images/gallery/waterloo-catering-social-party.jpg">
+                <img loading="lazy" src="images/gallery/waterloo-catering-social-party.jpg" alt="Waterloo Catering Social Party" />
+                <figcaption>Waterloo Catering Social Party</figcaption>
+            </figure>
+
+            <figure class="gallery-item" data-type="image" data-src="images/gallery/wedding-cake-toronto.jpg">
+                <img loading="lazy" src="images/gallery/wedding-cake-toronto.jpg" alt="Wedding Cake Toronto" />
+                <figcaption>Wedding Cake Toronto</figcaption>
+            </figure>
+
+        </div>
+    </div>
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Britney Button Events</h4>
+                    <p>Your premier catering partner in Toronto, Waterloo, Blue Mountain and Surrounding areas.</p>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/britneybuttonevents/" target="_blank" rel="noopener">Instagram</a>
+                        <a href="#" target="_blank" rel="noopener">Facebook</a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <p>95 Waverley rd<br>Toronto, ON, Canada</p>
+                    <p>
+                        <a href="mailto:britneybutton1@gmail.com">britneybutton1@gmail.com</a><br>
+                        <a href="tel:+15199987282">(519) 998-7282</a>
+                    </p>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#corporate">Corporate Menu</a></li>
+                        <li><a href="#weddings">Wedding Packages</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                        <li><a href="#careers">Careers</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Britney Button Events. All Rights Reserved. | <a href="#">Privacy Policy</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <div class="lightbox" id="lightbox" aria-modal="true" role="dialog">
+        <div class="lightbox-content" id="lbContent" tabindex="0"></div>
+        <button class="close" id="lbClose" aria-label="Close lightbox">✕</button>
+        <button class="prev" id="lbPrev" aria-label="Previous image">❮</button>
+        <button class="next" id="lbNext" aria-label="Next image">❯</button>
+        <p class="caption" id="lbCaption"></p>
+    </div>
+
+    <script>
+        (function(){
+            const figures = Array.from(document.querySelectorAll('.gallery-grid figure.gallery-item'));
+            const lightbox = document.getElementById('lightbox');
+            const lbContent = document.getElementById('lbContent');
+            const lbCaption = document.getElementById('lbCaption');
+            const media = [];
+
+            figures.forEach(t => {
+                const src = t.dataset.src || t.querySelector('img').getAttribute('src');
+                const caption = t.querySelector('figcaption')?.textContent || "";
+                if(src) {
+                    media.push({ el: t, type: 'image', src: src, caption: caption });
+                }
+            });
+
+            let currentIndex = -1;
+
+            function openAt(i){
+                currentIndex = i;
+                const item = media[i];
+                lbContent.innerHTML = `<img src="${item.src}" alt="${item.caption}">`;
+                lbCaption.textContent = item.caption;
+                lightbox.classList.add('open');
+                document.body.style.overflow = 'hidden';
+            }
+
+            media.forEach((m, idx) => { m.el.onclick = () => openAt(idx); });
+
+            document.getElementById('lbClose').onclick = () => { lightbox.classList.remove('open'); document.body.style.overflow = ''; };
+            document.getElementById('lbPrev').onclick = (e) => { e.stopPropagation(); openAt((currentIndex - 1 + media.length) % media.length); };
+            document.getElementById('lbNext').onclick = (e) => { e.stopPropagation(); openAt((currentIndex + 1) % media.length); };
+            
+            lightbox.onclick = (e) => {
+                if(e.target === lightbox || e.target === lbContent) {
+                    lightbox.classList.remove('open');
+                    document.body.style.overflow = '';
+                }
+            };
+            
+            document.addEventListener('keydown', (e) => {
+                if (!lightbox.classList.contains('open')) return;
+                if (e.key === 'Escape') document.getElementById('lbClose').click();
+                if (e.key === 'ArrowLeft') document.getElementById('lbPrev').click();
+                if (e.key === 'ArrowRight') document.getElementById('lbNext').click();
+            });
+        })();
+    </script>
+</body>
+</html>
