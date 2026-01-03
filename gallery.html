@@ -4,93 +4,156 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Photo Gallery</title>
+    
+    <link rel="stylesheet" href="main.css">
+
     <style>
-        /* BASIC PAGE RESET */
+        /* Add padding to account for the fixed navbar defined in main.css */
         body {
-            margin: 0;
-            padding: 20px;
-            font-family: sans-serif;
-            background-color: #f4f4f4;
+            padding-top: var(--nav-height); 
         }
 
-        h1 { text-align: center; margin-bottom: 30px; }
+        .gallery-wrapper {
+            padding: 40px 0;
+        }
 
-        /* GALLERY CONTAINER */
+        /* THE JUSTIFIED LAYOUT ENGINE 
+           This overrides the Grid layout in main.css to match your screenshot 
+        */
         .gallery-container {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px; /* Space between images */
+            gap: 15px; /* The white space between photos */
         }
 
-        /* GALLERY ITEM (The Wrapper) */
         .gallery-item {
-            height: 40vh; /* TARGET HEIGHT: Adjust this to make rows taller/shorter */
+            /* HEIGHT CONTROL:
+               Change this value to make rows taller or shorter. 
+               300px - 350px is usually the sweet spot for landscape photos.
+            */
+            height: 350px; 
             flex-grow: 1;
             position: relative;
             overflow: hidden;
             border-radius: 4px;
-        }
-
-        /* THE IMAGE ITSELF */
-        .gallery-item img {
-            max-height: 100%;
-            min-width: 100%;
-            object-fit: cover; /* Ensures the image fills the flex box neatly */
-            vertical-align: bottom;
-            transition: transform 0.3s ease;
-        }
-
-        /* HOVER EFFECT (Optional) */
-        .gallery-item:hover img {
-            transform: scale(1.05);
             cursor: pointer;
         }
 
-        /* LAST ROW HANDLING */
-        /* This prevents the last image from stretching 100% width if it's alone */
+        .gallery-item img {
+            max-height: 100%;
+            min-width: 100%;
+            object-fit: cover;
+            vertical-align: bottom;
+            transition: transform 0.4s ease;
+        }
+
+        /* Hover Zoom Effect */
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        /* LAST ROW HANDLING
+           This invisible element pushes the last items to the left 
+           so they don't stretch across the whole screen.
+        */
         .gallery-container::after {
             content: '';
-            flex-grow: 99999;
+            flex-grow: 1000000000;
         }
 
-        /* CAPTION STYLING */
-        .caption {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(0,0,0,0.6);
-            color: white;
-            padding: 8px;
-            font-size: 14px;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            text-align: center;
+        /* Responsive adjustments */
+        @media (max-width: 1024px) {
+            .gallery-item { height: 250px; }
         }
 
-        .gallery-item:hover .caption {
-            opacity: 1;
-        }
-
-        /* MOBILE RESPONSIVENESS */
-        /* On smaller screens, make the rows shorter so we see more content */
         @media (max-width: 768px) {
-            .gallery-item {
-                height: 25vh;
-            }
+            .gallery-item { height: 200px; }
         }
+        
         @media (max-width: 480px) {
-            .gallery-item {
-                height: 20vh;
-            }
+            .gallery-item { height: auto; width: 100%; } /* Stack vertically on mobile */
         }
     </style>
 </head>
 <body>
 
-    <h1>Project Gallery</h1>
+    <header class="main-header">
+        <div class="container header-container">
+            <div class="logo">
+                <a href="index.html">My<span>Website</span></a>
+            </div>
+            
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#" class="btn-nav">Contact</a></li>
+                </ul>
+            </nav>
 
-    <div id="gallery-container" class="gallery-grid"></div>
+            <div class="mobile-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <div class="container gallery-wrapper">
+        <div class="center-text">
+            <h1 class="section-title">Our Projects</h1>
+            <p style="margin-bottom: 40px; color: var(--text-light);">
+                A collection of our recent landscape and architecture work.
+            </p>
+        </div>
+
+        <div id="gallery-container" class="gallery-container">
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1558909612-e29172f3e098?auto=format&fit=crop&w=800&q=80" alt="Landscape">
+            </div>
+
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1476610182048-b716b8518aae?auto=format&fit=crop&w=800&q=80" alt="Landscape">
+            </div>
+
+             <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1600596542815-e32c8ec23fc9?auto=format&fit=crop&w=800&q=80" alt="Landscape">
+            </div>
+
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1596245347206-880c8855ce3f?auto=format&fit=crop&w=800&q=80" alt="Backyard">
+            </div>
+
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80" alt="Modern Home">
+            </div>
+             <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1502005097973-6a7082348e28?auto=format&fit=crop&w=600&q=80" alt="Interior">
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>About Us</h4>
+                    <p>Creating beautiful spaces that inspire and delight.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li>123 Main Street</li>
+                        <li>contact@example.com</li>
+                        <li>(555) 123-4567</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2026 MyWebsite. All rights reserved.
+            </div>
+        </div>
+    </footer>
 
     <script src="gallery.js"></script>
 
