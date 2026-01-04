@@ -1,40 +1,53 @@
-document.addEventListener("DOMContentLoaded", function() {
-    const container = document.getElementById('gallery-container');
-    const imagePath = 'images/gallery/'; 
+document.addEventListener('DOMContentLoaded', async () => {
+    const container = document.getElementById('gallery');
+    if (!container) return;
 
-    fetch('gallery_data.json')
-        .then(response => {
-            if (!response.ok) {
-                throw new Error("HTTP error " + response.status);
-            }
-            return response.json();
-        })
-        .then(images => {
-            // Check if gallery is empty
-            if (images.length === 0) {
-                container.innerHTML = '<p>No images found.</p>';
-                return;
-            }
+    // Load JSON
+    const res = await fetch('gallery_data.json');
+    const images = await res.json();   // [{ full: '...', low: '...' }, ...]
 
-            // Loop through the list and create HTML for each image
-            images.forEach(filename => {
-                // Create the div wrapper
-                const itemDiv = document.createElement('div');
-                itemDiv.className = 'gallery-item'; // Matches your CSS class
+    // Build DOM elements correctly
+    images.forEach(data => {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'gallery-item';
 
-                // Create the image tag
-                const img = document.createElement('img');
-                img.src = imagePath + filename;
-                img.alt = filename;
-                img.loading = "lazy"; // Improves load speed
+        const img = document.createElement('img');
+        img.src = data.low;             // low‑res first
+        img.dataset.full = data.full;   // high‑res path
+        img.loading = 'lazy';
+        img.className = 'progressive-img';
+        img.alt = 'Gallery image';
 
-                // Append image to div, and div to container
-                itemDiv.appendChild(img);
-                container.appendChild(itemDiv);
-            });
-        })
-        .catch(error => {
-            console.error('Error loading gallery:', error);
-            container.innerHTML = '<p>Error loading images. Check console for details.</p>';
+        wrapper.appendChild(img);
+        container.appendChild(wrapper);
+    });
+
+    // Progressive swap: low -> full
+    const onIntersect = (entries, observer) => {
+        entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+
+        const img = entry.target;
+        const fullSrc = img.dataset.full;
+        if (!fullSrc) return;
+
+        const hi = new Image();
+        hi.src = fullSrc;
+        hi.onload = () => {
+            img.src = fullSrc;
+            img.classList.add('loaded');
+        };
+
+        observer.unobserve(img);
         });
+    };
+
+    const observer = new IntersectionObserver(onIntersect, {
+        rootMargin: '100px',
+        threshold: 0.1
+    });
+
+    document.querySelectorAll('.progressive-img').forEach(img => {
+        observer.observe(img);
+    });
 });
