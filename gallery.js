@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', async () => {
-  const container = document.getElementById('gallery');
+  const container = document.getElementById('gallery-container');
   console.log('Gallery container:', container);
   if (!container) return;
 
