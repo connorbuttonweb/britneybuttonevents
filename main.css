@@ -392,9 +392,11 @@ img {
 /* Gallery container styling for masonry effect using CSS columns */
 #gallery-container.gallery-grid {
     columns: 200px auto; /* Adjust min column width for more/less columns */
-    column-gap: 5px;
-    max-width: 1200px;
-    margin: 0 auto;
+    column-gap: 10px;
+    width: 100%;
+    max-width: none;
+    padding: 0 20px;
+    margin: 0;
 }
 
 /* Individual gallery item */
