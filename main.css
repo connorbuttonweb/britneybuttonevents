@@ -387,49 +387,81 @@ img {
 
 
 /* =========================================
-9. GALLERY SECTION (MASONRY STYLE)
-========================================= */
+   9. GALLERY SECTION (Strict No-Crop Row)
+   ========================================= */
 
-/* Masonry-style main container */
 .gallery-grid {
-  /* "column-width" is the key for the zoom behavior.
-     The browser will fit as many 250px columns as possible.
-     Zooming out = more space = more columns (like the Pines example). */
-  column-width: 250px;
-  column-gap: 15px; /* Space between columns */
+  display: flex;
+  flex-wrap: wrap;
   
-  /* Ensure container spans full width */
+  /* Center the items. This makes the uneven edges on the left/right 
+     look balanced instead of leaving a huge gap on just the right side. */
+  justify-content: center;
+  
+  /* Spacing from your variables */
+  gap: var(--space-16); 
+  padding: 0 4%;
   width: 100%;
-  max-width: 100% !important;
-  padding: 0 40px;
-  display: block; 
+  box-sizing: border-box;
 }
 
-/* Individual image wrappers */
 .gallery-item {
-  /* Prevent the image wrapper from being split across two columns */
-  break-inside: avoid;
+  /* 1. Set the fixed height for the row strip */
+  height: 300px; 
   
-  /* Space between items vertically within the column */
-  margin-bottom: 15px;
+  /* 2. CRITICAL: Prevent the item from stretching. 
+     Stretching causes distortion or requires cropping. */
+  flex-grow: 0;
   
-  /* Ensure wrapper behaves correctly in column layout */
-  display: inline-block;
-  width: 100%;
+  /* 3. Let the width be defined solely by the image inside */
+  width: auto;
+  
+  margin: 0;
+  position: relative;
 }
 
-/* Images fit width naturally */
 .gallery-item img {
-  width: 100%;
-  height: auto;
+  /* Force image to match container height */
+  height: 100%;
+  
+  /* Allow width to adjust naturally based on the image's aspect ratio */
+  width: auto; 
+  
+  /* Ensure the image is a block to remove bottom spacing artifacts */
   display: block;
-  border-radius: 2px; /* Optional: slight rounding like the reference */
+  
+  /* Optional styling from your design system */
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-sm);
   transition: transform 0.3s ease;
 }
 
-/* Hover effect - subtle zoom */
+/* Hover effect */
 .gallery-item:hover img {
-  transform: scale(1.03);
+  transform: scale(1.02);
+  box-shadow: var(--shadow-md);
+}
+
+/* --- Responsive Heights --- */
+
+/* Tablet: Reduce height so images aren't too huge */
+@media (max-width: 1024px) {
+  .gallery-item {
+    height: 220px;
+  }
+}
+
+/* Mobile: Much shorter rows to fit narrow screens */
+@media (max-width: 768px) {
+  .gallery-grid {
+    padding: 0 var(--space-16);
+    gap: var(--space-8);
+  }
+  
+  .gallery-item {
+    /* On mobile, 150px is usually a good balance */
+    height: 150px;
+  }
 }
 
 /* =========================================
