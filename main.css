@@ -391,7 +391,6 @@ img {
 
 /* Masonry-style main container */
 .gallery-grid {
-  column-count: 3;
   column-gap: 20px;
   width: 100%;
   padding: 20px 40px;
