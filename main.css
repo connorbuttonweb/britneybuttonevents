@@ -392,26 +392,22 @@ img {
 
 /* Masonry-style main container */
 .gallery-grid {
-  column-gap: 20px;
-  width: 100%;
-  padding: 20px 40px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;              /* space between images */
+  justify-content: center;
 }
 
 /* Individual image wrappers */
 .gallery-item {
-  break-inside: avoid;
-  margin-bottom: 20px;
-  overflow: hidden;
-  border-radius: 4px;
+  flex: 0 0 220px;        /* try 200–260px to taste */
 }
 
 /* Images fit height naturally */
 .gallery-item img {
   width: 100%;
   height: auto;
-  object-fit: cover;
   display: block;
-  transition: transform 0.5s ease;
 }
 
 /* Hover effect - subtle zoom */
