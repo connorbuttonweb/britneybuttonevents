@@ -392,8 +392,8 @@ img {
 
 /* Gallery container styling for masonry effect using CSS columns */
 #gallery-container.gallery-grid {
-    columns: 250px auto; /* Minimum column width; number of columns adjusts automatically based on container width */
-    column-gap: 15px;
+    columns: 200px auto; /* Adjust min column width for more/less columns */
+    column-gap: 5px;
     max-width: 1200px;
     margin: 0 auto;
 }
@@ -401,7 +401,7 @@ img {
 /* Individual gallery item */
 .gallery-item {
     break-inside: avoid;
-    margin-bottom: 15px;
+    margin-bottom: 5px;
     page-break-inside: avoid; /* For older browsers */
 }
 
@@ -410,18 +410,10 @@ img {
     width: 100%;
     height: auto;
     display: block;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     cursor: pointer;
-    transition: transform 0.3s ease;
 }
 
-/* Hover effect for images */
-.gallery-item img:hover {
-    transform: scale(1.05);
-}
-
-/* Modal for enlarged image (if needed, assuming similar functionality) */
+/* Modal for enlarged image */
 .modal {
     display: none;
     position: fixed;
@@ -457,8 +449,14 @@ img {
     color: #bbb;
 }
 
-/* Optional: Media queries for fine-tuning on very small screens */
-@media (max-width: 600px) {
+/* Responsiveness */
+@media (max-width: 1024px) {
+    #gallery-container.gallery-grid {
+        columns: 200px auto;
+    }
+}
+
+@media (max-width: 767px) {
     #gallery-container.gallery-grid {
         columns: 1 auto;
     }
