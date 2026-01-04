@@ -1,10 +1,39 @@
 import os
 import json
+from PIL import Image  # pip install pillow
 
 # Configuration
-IMAGE_FOLDER = 'images/gallery'     # Where your images live
-OUTPUT_FILE = 'gallery_data.json'   # The file JS will read
+IMAGE_FOLDER   = 'images/gallery'      # Where your original images live
+OUTPUT_FILE    = 'gallery_data.json'   # The file JS will read
 VALID_EXTENSIONS = ('.png', '.jpg', '.jpeg', '.gif', '.webp')
+
+# Low‑res settings
+LOW_SUFFIX     = '-low'                # e.g., photo.jpg -> photo-low.jpg
+LOW_MAX_WIDTH  = 400                   # px (adjust as you like)
+JPEG_QUALITY   = 40                    # compression for low‑res
+
+def make_low_res(src_path, dst_path):
+    """Create a low‑resolution copy of src_path at dst_path."""
+    # Skip if it already exists
+    if os.path.exists(dst_path):
+        return
+
+    with Image.open(src_path) as img:
+        # Maintain aspect ratio, constrain by width
+        w, h = img.size
+        if w > LOW_MAX_WIDTH:
+            new_h = int(h * (LOW_MAX_WIDTH / w))
+            img = img.resize((LOW_MAX_WIDTH, new_h), Image.LANCZOS)
+
+        # Ensure folder exists
+        os.makedirs(os.path.dirname(dst_path), exist_ok=True)
+
+        # Save as JPEG-ish format (keeps things small)
+        ext = os.path.splitext(dst_path)[1].lower()
+        if ext in ('.jpg', '.jpeg', '.webp'):
+            img.save(dst_path, quality=JPEG_QUALITY, optimize=True)
+        else:
+            img.save(dst_path)
 
 def update_json():
     # 1. Check if folder exists
@@ -12,14 +41,32 @@ def update_json():
         print(f"Error: Folder '{IMAGE_FOLDER}' not found.")
         return
 
-    # 2. Get all valid image files
+    # 2. Get all valid original image files
     images = []
     for filename in os.listdir(IMAGE_FOLDER):
-        if filename.lower().endswith(VALID_EXTENSIONS):
-            images.append(filename)
-    
-    # Optional: Sort them alphabetically or by date
-    images.sort() 
+        name, ext = os.path.splitext(filename)
+        if ext.lower() in VALID_EXTENSIONS:
+            # Ignore any files that are already marked as low‑res
+            if name.endswith(LOW_SUFFIX):
+                continue
+
+            full_path = os.path.join(IMAGE_FOLDER, filename)
+
+            # Build low‑res filename/path
+            low_name = f"{name}{LOW_SUFFIX}{ext}"
+            low_path = os.path.join(IMAGE_FOLDER, low_name)
+
+            # Create low‑res copy if needed
+            make_low_res(full_path, low_path)
+
+            # Store both paths (relative) for JS
+            images.append({
+                "full": os.path.join(IMAGE_FOLDER, filename).replace('\\', '/'),
+                "low":  os.path.join(IMAGE_FOLDER, low_name).replace('\\', '/')
+            })
+
+    # Optional: Sort by filename
+    images.sort(key=lambda x: x["full"])
 
     # 3. Write list to JSON
     with open(OUTPUT_FILE, 'w') as f:
