@@ -391,21 +391,21 @@ img {
    ========================================= */
 
 .gallery-grid {
-  column-count: 4;                  /* 4 columns on desktop */
-  column-gap: 24px;                 /* Space between columns */
-  padding: 40px 5%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 12px;
+  padding: 0.75rem 0;
   width: 100%;
-  max-width: 1400px;
-  margin: 0 auto;
 }
 
 /* Prevent items from breaking across columns */
 .gallery-item {
-  break-inside: avoid;
-  margin-bottom: 24px;              /* Vertical spacing between rows */
+  margin: 0;
   position: relative;
+  cursor: zoom-in;
   overflow: hidden;
-  border-radius: 8px;
+  aspect-ratio: 1 / 1;
+  break-inside: avoid;
   transition: all 0.35s ease;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
   background: var(--white);
@@ -420,11 +420,9 @@ img {
 /* Image styling */
 .gallery-item img {
   width: 100%;
-  height: auto;
-  display: block;
-  border-radius: 8px;
-  transition: transform 0.45s ease;
+  height: 100%;
   object-fit: cover;
+  display: block;
 }
 
 /* Gentle zoom on hover */
@@ -450,8 +448,15 @@ img {
 
 /* Responsive breakpoints */
 @media (max-width: 1200px) {
+  .job-block {
+    margin: 2rem auto;
+    padding: 1.5rem 0;
+  }
+  
   .gallery-grid {
-    column-count: 3;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px;
+    padding: 0.5rem 0;
   }
 }
 
