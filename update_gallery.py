@@ -1,6 +1,6 @@
 import os
 import json
-from PIL import Image  # pip install pillow
+from PIL import Image, ImageOps  # pip install pillow
 
 # Configuration
 IMAGE_FOLDER = 'images/gallery'     # Where your images live
@@ -13,21 +13,20 @@ LOW_MAX_WIDTH  = 400                   # px (adjust as you like)
 JPEG_QUALITY   = 40                    # compression for low‑res
 
 def make_low_res(src_path, dst_path):
-    # Skip if it already exists
     if os.path.exists(dst_path):
         return
 
     with Image.open(src_path) as img:
-        # Maintain aspect ratio, constrain by width
+        # Normalize based on EXIF so pixels match how the image should look
+        img = ImageOps.exif_transpose(img)
+
         w, h = img.size
         if w > LOW_MAX_WIDTH:
             new_h = int(h * (LOW_MAX_WIDTH / w))
             img = img.resize((LOW_MAX_WIDTH, new_h), Image.LANCZOS)
 
-        # Ensure folder exists
         os.makedirs(os.path.dirname(dst_path), exist_ok=True)
 
-        # Save as JPEG-ish format (keeps things small)
         ext = os.path.splitext(dst_path)[1].lower()
         if ext in ('.jpg', '.jpeg', '.webp'):
             img.save(dst_path, quality=JPEG_QUALITY, optimize=True)
