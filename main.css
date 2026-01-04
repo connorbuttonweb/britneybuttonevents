@@ -392,46 +392,42 @@ img {
 
 /* Masonry-style main container */
 .gallery-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;              /* space between images */
-  justify-content: center;
+  /* "column-width" is the key for the zoom behavior.
+     The browser will fit as many 250px columns as possible.
+     Zooming out = more space = more columns (like the Pines example). */
+  column-width: 250px;
+  column-gap: 15px; /* Space between columns */
+  
+  /* Ensure container spans full width */
+  width: 100%;
+  display: block; 
 }
 
 /* Individual image wrappers */
 .gallery-item {
-  flex: 0 0 220px;        /* try 200–260px to taste */
+  /* Prevent the image wrapper from being split across two columns */
+  break-inside: avoid;
+  
+  /* Space between items vertically within the column */
+  margin-bottom: 15px;
+  
+  /* Ensure wrapper behaves correctly in column layout */
+  display: inline-block;
+  width: 100%;
 }
 
-/* Images fit height naturally */
+/* Images fit width naturally */
 .gallery-item img {
   width: 100%;
   height: auto;
   display: block;
+  border-radius: 2px; /* Optional: slight rounding like the reference */
+  transition: transform 0.3s ease;
 }
 
 /* Hover effect - subtle zoom */
 .gallery-item:hover img {
   transform: scale(1.03);
-}
-
-/* Responsive columns */
-@media (max-width: 1200px) {
-  .gallery-grid {
-    column-count: 3;
-  }
-}
-
-@media (max-width: 900px) {
-  .gallery-grid {
-    column-count: 2;
-  }
-}
-
-@media (max-width: 600px) {
-  .gallery-grid {
-    column-count: 1;
-  }
 }
 
 /* =========================================
