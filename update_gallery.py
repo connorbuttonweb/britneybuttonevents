@@ -3,8 +3,8 @@ import json
 from PIL import Image  # pip install pillow
 
 # Configuration
-IMAGE_FOLDER   = 'images/gallery'      # Where your original images live
-OUTPUT_FILE    = 'gallery_data.json'   # The file JS will read
+IMAGE_FOLDER = 'images/gallery'     # Where your images live
+OUTPUT_FILE = 'gallery_data.json'   # The file JS will read
 VALID_EXTENSIONS = ('.png', '.jpg', '.jpeg', '.gif', '.webp')
 
 # Low‑res settings
@@ -13,7 +13,6 @@ LOW_MAX_WIDTH  = 400                   # px (adjust as you like)
 JPEG_QUALITY   = 40                    # compression for low‑res
 
 def make_low_res(src_path, dst_path):
-    """Create a low‑resolution copy of src_path at dst_path."""
     # Skip if it already exists
     if os.path.exists(dst_path):
         return
