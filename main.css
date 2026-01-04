@@ -385,28 +385,17 @@ img {
   margin: 0;
 }
 
+
 /* =========================================
 9. GALLERY SECTION (MASONRY STYLE)
 ========================================= */
 
 /* Masonry-style main container */
 .gallery-grid {
+  column-count: 4;           /* desktop */
   column-gap: 20px;
   width: 100%;
-  padding: 20px 40px;
-}
-
-/* Responsive columns */
-@media (max-width: 900px) {
-  .gallery-grid {
-    column-count: 2;
-  }
-}
-
-@media (max-width: 600px) {
-  .gallery-grid {
-    column-count: 1;
-  }
+  padding: 20px 0;
 }
 
 /* Individual image wrappers */
@@ -426,23 +415,28 @@ img {
   transition: transform 0.5s ease;
 }
 
-/* Hover Effect - Subtle Zoom */
+/* Hover effect - subtle zoom */
 .gallery-item:hover img {
   transform: scale(1.03);
 }
 
-/* Progressive image loading */
-.progressive-img {
-  width: 100%;
-  height: auto;
-  filter: blur(8px);
-  transform: scale(1.02);
-  transition: filter 0.4s ease, transform 0.4s ease;
+/* Responsive columns */
+@media (max-width: 1200px) {
+  .gallery-grid {
+    column-count: 3;
+  }
 }
 
-.progressive-img.loaded {
-  filter: blur(0);
-  transform: scale(1);
+@media (max-width: 900px) {
+  .gallery-grid {
+    column-count: 2;
+  }
+}
+
+@media (max-width: 600px) {
+  .gallery-grid {
+    column-count: 1;
+  }
 }
 
 /* =========================================
