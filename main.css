@@ -387,81 +387,99 @@ img {
 
 
 /* =========================================
-   9. GALLERY SECTION (Strict No-Crop Row)
+   9. GALLERY SECTION – Elegant Masonry Style
    ========================================= */
 
 .gallery-grid {
-  display: flex;
-  flex-wrap: wrap;
-  
-  /* Center the items. This makes the uneven edges on the left/right 
-     look balanced instead of leaving a huge gap on just the right side. */
-  justify-content: center;
-  
-  /* Spacing from your variables */
-  gap: var(--space-16); 
-  padding: 0 4%;
+  column-count: 4;                  /* 4 columns on desktop */
+  column-gap: 24px;                 /* Space between columns */
+  padding: 40px 5%;
   width: 100%;
-  box-sizing: border-box;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
+/* Prevent items from breaking across columns */
 .gallery-item {
-  /* 1. Set the fixed height for the row strip */
-  height: 300px; 
-  
-  /* 2. CRITICAL: Prevent the item from stretching. 
-     Stretching causes distortion or requires cropping. */
-  flex-grow: 0;
-  
-  /* 3. Let the width be defined solely by the image inside */
-  width: auto;
-  
-  margin: 0;
+  break-inside: avoid;
+  margin-bottom: 24px;              /* Vertical spacing between rows */
   position: relative;
+  overflow: hidden;
+  border-radius: 8px;
+  transition: all 0.35s ease;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  background: var(--white);
 }
 
+/* Hover lift + shadow effect */
+.gallery-item:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 20px 45px rgba(212, 163, 115, 0.25); /* subtle gold tint */
+}
+
+/* Image styling */
 .gallery-item img {
-  /* Force image to match container height */
-  height: 100%;
-  
-  /* Allow width to adjust naturally based on the image's aspect ratio */
-  width: auto; 
-  
-  /* Ensure the image is a block to remove bottom spacing artifacts */
+  width: 100%;
+  height: auto;
   display: block;
-  
-  /* Optional styling from your design system */
-  border-radius: var(--radius-sm);
-  box-shadow: var(--shadow-sm);
-  transition: transform 0.3s ease;
+  border-radius: 8px;
+  transition: transform 0.45s ease;
+  object-fit: cover;
 }
 
-/* Hover effect */
+/* Gentle zoom on hover */
 .gallery-item:hover img {
-  transform: scale(1.02);
-  box-shadow: var(--shadow-md);
+  transform: scale(1.06);
 }
 
-/* --- Responsive Heights --- */
+/* Optional elegant overlay (very subtle) */
+.gallery-item::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(212,163,115,0.08), rgba(252,228,236,0.25));
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  border-radius: 8px;
+  pointer-events: none;
+}
 
-/* Tablet: Reduce height so images aren't too huge */
-@media (max-width: 1024px) {
-  .gallery-item {
-    height: 220px;
+.gallery-item:hover::after {
+  opacity: 1;
+}
+
+/* Responsive breakpoints */
+@media (max-width: 1200px) {
+  .gallery-grid {
+    column-count: 3;
   }
 }
 
-/* Mobile: Much shorter rows to fit narrow screens */
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .gallery-grid {
-    padding: 0 var(--space-16);
-    gap: var(--space-8);
+    column-count: 2;
+    column-gap: 20px;
+    padding: 30px 4%;
+  }
+}
+
+@media (max-width: 600px) {
+  .gallery-grid {
+    column-count: 1;
+    padding: 20px 3%;
   }
   
   .gallery-item {
-    /* On mobile, 150px is usually a good balance */
-    height: 150px;
+    margin-bottom: 20px;
   }
+}
+
+/* Optional: If you ever want a stricter grid instead of masonry */
+.gallery-grid.alternative-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  gap: 28px;
+  column-count: initial; /* override columns */
 }
 
 /* =========================================
