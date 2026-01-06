@@ -161,6 +161,10 @@ img {
     padding: 0 40px;        /* Adds a small breathable margin on the edges */
 }
 
+.logo span {
+  color: var(--primary-color);
+}
+
 .logo {
     display: flex;         /* Places image and text side-by-side */
     align-items: center;    /* Vertically centers the text with the logo image */
@@ -174,6 +178,12 @@ img {
 }
 
 .logo a {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--black);
+    text-transform: uppercase;
+    letter-spacing: 1px;
     white-space: nowrap;    /* Prevents the name from wrapping to a second line */
 }
 
