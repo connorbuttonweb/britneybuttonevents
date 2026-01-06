@@ -153,23 +153,28 @@ img {
 }
 
 .header-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;            /* Uses the full width of the browser */
+    max-width: none;        /* Removes the 1200px restriction */
+    padding: 0 40px;        /* Adds a small breathable margin on the edges */
+}
+
+.logo {
+    display: flex;         /* Places image and text side-by-side */
+    align-items: center;    /* Vertically centers the text with the logo image */
+    gap: 12px;              /* Creates consistent space between the logo and text */
+}
+
+.logo img {
+    height: 50px;           /* Controls the size of the BB icon */
+    width: auto;
+    display: block;
 }
 
 .logo a {
-  font-family: var(--font-heading);
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--black);
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
-.logo span {
-  color: var(--primary-color);
+    white-space: nowrap;    /* Prevents the name from wrapping to a second line */
 }
 
 .main-nav ul {
