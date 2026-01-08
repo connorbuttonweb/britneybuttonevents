@@ -277,6 +277,25 @@ img {
   text-shadow: 0 1px 2px rgba(0,0,0,0.3);
 }
 
+.hero-logo {
+    width: 100%;
+    max-width: 500px; /* Adjust this to change the size of the logo */
+    height: auto;
+    margin-bottom: 40px; /* Space between logo and button */
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    /* Optional: filter helps the logo pop if the background is dark */
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3)); 
+}
+
+@media (max-width: 768px) {
+    .hero-logo {
+        max-width: 300px;
+        margin-bottom: 30px;
+    }
+}
+
 /* =========================================
 6. INTRO / ABOUT SECTION
 ========================================= */
