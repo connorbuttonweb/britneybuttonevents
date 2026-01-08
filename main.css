@@ -279,9 +279,9 @@ img {
 
 .hero-logo {
     width: 100%;
-    max-width: 500px; /* Adjust this to change the size of the logo */
+    max-width: 250px; /* Adjust this to change the size of the logo */
     height: auto;
-    margin-bottom: 40px; /* Space between logo and button */
+    margin-bottom: 20px; /* Space between logo and button */
     display: block;
     margin-left: auto;
     margin-right: auto;
