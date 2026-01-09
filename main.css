@@ -563,7 +563,7 @@ img {
 footer {
   background-color: var(--primary-dark);
   color: #aaa;
-  padding: 80px 0 30px;
+  padding: 40px 0 20px;
 }
 
 .footer-grid {
@@ -600,11 +600,20 @@ footer {
 }
 
 .social-links a {
-  display: inline-block;
-  margin-right: 15px;
-  color: var(--white);
-  font-weight: 700;
-  font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px; /* Creates space between the logo and "Instagram" */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.social-links i {
+    font-size: 1.2rem; /* Makes the logo slightly larger than the text */
+    color: var(--primary-color); /* Sets it to your champagne gold */
+}
+
+.social-links a:hover i {
+    color: var(--white); /* Changes icon color when you hover over the link */
 }
 
 .footer-bottom {
