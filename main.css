@@ -556,6 +556,7 @@ img {
     }
 }
 
+
 /* =========================================
 10. FOOTER
 ========================================= */
@@ -652,6 +653,118 @@ footer {
     grid-template-columns: 1fr;
   }
 }
+
+/* =========================================
+12. PLANNING PAGE
+========================================= */
+
+.start-planning {
+  padding: 4rem 1.5rem;
+  background: #ffffff;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+}
+
+.start-planning .container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.start-planning h1 {
+  font-size: 2.4rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.start-planning p.subtitle {
+  text-align: center;
+  color: #777;
+  margin-bottom: 2.5rem;
+}
+
+.planning-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.4fr);
+  gap: 3rem;
+}
+
+@media (max-width: 768px) {
+  .planning-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.contact-info h2 {
+  font-size: 1.2rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.contact-info p {
+  margin: 0.25rem 0;
+  color: #444;
+}
+
+.contact-info a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+/* Form styles */
+.planning-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.9rem 1.2rem;
+}
+
+.planning-form .full-width {
+  grid-column: 1 / -1;
+}
+
+.planning-form input,
+.planning-form select,
+.planning-form textarea {
+  width: 100%;
+  padding: 0.8rem 0.9rem;
+  border: 1px solid #ddd;
+  border-radius: 0;
+  background: #f7f7f7;
+  font-size: 0.95rem;
+  color: #333;
+  box-sizing: border-box;
+}
+
+.planning-form textarea {
+  min-height: 150px;
+  resize: vertical;
+}
+
+.planning-form input:focus,
+.planning-form select:focus,
+.planning-form textarea:focus {
+  outline: none;
+  border-color: #000;
+  background: #fff;
+}
+
+.planning-form button {
+  grid-column: 1 / -1;
+  padding: 0.9rem 1.6rem;
+  border: none;
+  background: #000;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.planning-form button:hover {
+  background: #222;
+}
+
 
 /* =========================================
    LIGHTBOX STYLES
