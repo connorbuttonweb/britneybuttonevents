@@ -561,7 +561,7 @@ img {
 ========================================= */
 
 footer {
-  background-color: #111;
+  background-color: var(--primary-color);
   color: #aaa;
   padding: 80px 0 30px;
 }
