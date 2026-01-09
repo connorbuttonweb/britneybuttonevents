@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       // Create DOM nodes
-      images.forEach(data => {
+      images.forEach((data, index) => {   // <— add index param
         if (!data || !data.low || !data.full) return;
 
         const wrapper = document.createElement('div');
@@ -30,6 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const img = document.createElement('img');
         img.src = data.low;
         img.dataset.full = data.full;
+        img.dataset.index = index;        // <— add this line
         img.loading = 'lazy';
         img.className = 'progressive-img';
         img.alt = 'Gallery image';
