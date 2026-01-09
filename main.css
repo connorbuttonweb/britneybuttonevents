@@ -478,7 +478,7 @@ img {
 
 /* Gallery container styling for masonry effect using CSS columns */
 #gallery-container.gallery-grid {
-    columns: 250px auto; /* Adjust min column width for more/less columns */
+    columns: 275px auto; /* Adjust min column width for more/less columns */
     column-gap: 10px;
     width: 100%;
     max-width: none;
@@ -489,7 +489,7 @@ img {
 /* Individual gallery item */
 .gallery-item {
     break-inside: avoid;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
     page-break-inside: avoid; /* For older browsers */
 }
 
