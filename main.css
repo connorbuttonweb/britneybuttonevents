@@ -4,10 +4,10 @@
 
 :root {
   /* Theme Colors: Champagne Gold & Soft Blush */
-  --primary-color: #d4a373; /* Champagne Gold / Tan */
-  --primary-dark: #b08d55; /* Darker Gold for hover states */
-  --secondary-color: #fce4ec; /* Soft Blush/Pink Background */
-  --secondary-dark: #f8bbd0; /* Slightly darker blush */
+  --primary-color: #084ba1; /* Champagne Gold / Tan */
+  --primary-dark: #113a77; /* Darker Gold for hover states */
+  --secondary-color: #f7edd0; /* Soft Blush/Pink Background */
+  --secondary-dark: #f7edd0; /* Slightly darker blush */
   --accent-color: #333333; /* Charcoal for text */
   --text-dark: #333333; /* Main text color */
   --text-light: #666666; /* Secondary text color */
