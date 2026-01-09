@@ -64,6 +64,67 @@ document.addEventListener('DOMContentLoaded', () => {
       document.querySelectorAll('.progressive-img').forEach(img => {
         observer.observe(img);
       });
+
+      // ----- LIGHTBOX LOGIC -----
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const closeBtn = document.querySelector('.close-lightbox');
+        const prevBtn = document.querySelector('.prev-btn');
+        const nextBtn = document.querySelector('.next-btn');
+
+        let currentIndex = 0;
+
+        const openLightbox = index => {
+          currentIndex = index;
+          const data = images[currentIndex];
+          if (!data) return;
+          lightboxImg.src = data.full;
+          lightbox.style.display = 'flex'; // matches CSS .lightbox flex settings
+        };
+
+        const closeLightbox = () => {
+          lightbox.style.display = 'none';
+          lightboxImg.src = '';
+        };
+
+        const showNext = () => {
+          currentIndex = (currentIndex + 1) % images.length;
+          openLightbox(currentIndex);
+        };
+
+        const showPrev = () => {
+          currentIndex = (currentIndex - 1 + images.length) % images.length;
+          openLightbox(currentIndex);
+        };
+
+        // click on thumbnails
+        container.addEventListener('click', e => {
+          const img = e.target.closest('img.progressive-img');
+          if (!img) return;
+          const index = parseInt(img.dataset.index, 10);
+          if (Number.isNaN(index)) return;
+          openLightbox(index);
+        });
+
+        // controls
+        closeBtn.addEventListener('click', closeLightbox);
+        nextBtn.addEventListener('click', showNext);
+        prevBtn.addEventListener('click', showPrev);
+
+        // close when clicking outside image
+        lightbox.addEventListener('click', e => {
+          if (e.target === lightbox) closeLightbox();
+        });
+
+        // Esc to close, arrows to navigate
+        document.addEventListener('keydown', e => {
+          if (lightbox.style.display !== 'flex') return;
+          if (e.key === 'Escape') closeLightbox();
+          if (e.key === 'ArrowRight') showNext();
+          if (e.key === 'ArrowLeft') showPrev();
+        });
+        // ----- END LIGHTBOX LOGIC ----- 
+
     } catch (err) {
       console.error('Error loading gallery:', err);
     }
@@ -71,3 +132,4 @@ document.addEventListener('DOMContentLoaded', () => {
 
   loadGallery();
 });
+
