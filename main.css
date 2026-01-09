@@ -537,16 +537,22 @@ img {
     color: #bbb;
 }
 
-/* Responsiveness */
-@media (max-width: 1024px) {
-    #gallery-container.gallery-grid {
-        columns: 200px auto;
-    }
-}
-
 @media (max-width: 767px) {
+    /* Force 2 columns for a masonry look instead of 1 */
     #gallery-container.gallery-grid {
-        columns: 1 auto;
+        columns: 2 !important; 
+        column-gap: 8px !important; /* Tightens the space between columns */
+        padding: 0 10px !important; /* Reduces side margins on phone screens */
+    }
+
+    .gallery-item {
+        margin-bottom: 8px !important; /* Consistent vertical spacing */
+    }
+
+    /* Optional: Shrink the Gallery Title section slightly for mobile */
+    .gallery-section .section-title {
+        font-size: 1.8rem;
+        margin-bottom: 20px;
     }
 }
 
