@@ -124,6 +124,29 @@ document.addEventListener('DOMContentLoaded', () => {
           if (e.key === 'ArrowRight') showNext();
           if (e.key === 'ArrowLeft') showPrev();
         });
+
+        // --- Swipe Support for Mobile ---
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        lightbox.addEventListener('touchstart', e => {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        lightbox.addEventListener('touchend', e => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }, { passive: true });
+
+        function handleSwipe() {
+            const swipeThreshold = 50; // Minimum distance in pixels to count as a swipe
+            if (touchEndX < touchStartX - swipeThreshold) {
+                showNext(); // Swiped left -> Next photo
+            }
+            if (touchEndX > touchStartX + swipeThreshold) {
+                showPrev(); // Swiped right -> Previous photo
+            }
+        }
         // ----- END LIGHTBOX LOGIC ----- 
 
     } catch (err) {
