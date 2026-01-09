@@ -73,7 +73,7 @@ img {
 
 .section-header {
   margin-top: 80px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .center-text {
@@ -664,7 +664,7 @@ footer {
 ========================================= */
 
 .start-planning {
-  padding: 4rem 1.5rem;
+  padding: 2rem 1.5rem;
   background: #ffffff;
   font-family: "Helvetica Neue", Arial, sans-serif;
 }
