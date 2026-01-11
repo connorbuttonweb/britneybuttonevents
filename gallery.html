@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Britney Button Events | Catering & Event Planning Toronto, ON</title>
+
+    <meta name="description" content="Britney Button Events offers premier catering and event planning services in Toronto, Ontario. From corporate galas to dream weddings, we craft memorable culinary experiences.">
+
+    <meta name="keywords" content="catering Toronto, Toronto catering services, wedding catering Toronto, corporate catering Toronto, event planning Toronto, party planning Toronto, full‑service catering Toronto, private event catering Toronto, luxury catering Toronto, boutique catering Toronto, wedding receptions Toronto, bridal shower catering Toronto, engagement party catering Toronto, baby shower catering Toronto, birthday party catering Toronto, anniversary party catering Toronto, corporate events Toronto, office catering Toronto, holiday party catering Toronto, cocktail party catering Toronto, bespoke event planning Toronto, intimate dinner parties Toronto, garden party catering Toronto, seasonal menus Toronto, farm‑to‑table catering Toronto, gourmet catering Toronto, modern tablescapes Toronto, luxury event design Toronto, catering near me Toronto, event planner near me Toronto, wedding caterer near me Toronto, Toronto GTA catering, Toronto event planner GTA, Britney Button Events, Britney Button Events catering, Britney Button Events Toronto, Britney Button Events wedding catering, Britney Button Events event planning, Britney Button Events corporate events">
+
+    <link rel="icon" type="image/png" href="images/logo.png" />
+
+    <link rel="stylesheet" href="main.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <header class="main-header">
+        <div class="container header-container">
+            <div class="logo">
+                <img src="images/logo.png" alt="Britney Button Events Logo" style="height: 50px; margin-right: 15px;">
+                <a href="index.html">Britney Button <span>Events</span></a>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html#about">About</a></li>
+                    <!--
+                    <li><a href="#corporate">Corporate</a></li>
+                    <li><a href="#weddings">Weddings</a></li>
+                    <li><a href="#social">Social</a></li>
+                    <li><a href="#menus">Menus</a></li>
+                -->
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="planning.html" class="btn-nav">Start Planning</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </header>
+
+    <section class="section">
+        <div class="container center-text">
+            <h2 class="section-title">Gallery</h2>
+        </div>
+
+        <div id="gallery-container" class="gallery-grid">
+        <!-- Images injected by JS -->
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Britney Button Events</h4>
+                    <p>Your premier catering partner in Toronto, Waterloo, Blue Mountain, and Surrounding areas.</p>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/britneybuttonevents/" target="_blank" rel="noopener">
+                            <i class="fab fa-instagram"></i> Instagram
+                        </a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact Us</h4>
+                    <p>Toronto, ON<br>Waterloo, ON<br>Blue Mountains, ON</p>
+                    <p>
+                        <a href="mailto:britneybutton1@gmail.com">britneybutton1@gmail.com</a><br>
+                        <a href="tel:+15199987282">(519) 998-7282</a>
+                    </p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Britney Button Events. All Rights Reserved. | <a href="#">Privacy Policy</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <div id="gallery-container" class="gallery-grid"></div>
+
+    <div id="lightbox" class="lightbox">
+        <span class="close-lightbox">&times;</span>
+        <span class="nav-btn prev-btn">&#10094;</span>
+        <div class="lightbox-content">
+            <img id="lightbox-img" src="" alt="Expanded gallery image">
+        </div>
+        <span class="nav-btn next-btn">&#10095;</span>
+    </div>
+
+    <script src="gallery.js"></script>
+
+    <script>
+        const menuToggle = document.querySelector('.mobile-menu-toggle');
+        const mainNav = document.querySelector('.main-nav');
+
+        menuToggle.addEventListener('click', () => {
+            mainNav.classList.toggle('active');
+        });
+
+        // Close menu when a link is clicked
+        const navLinks = document.querySelectorAll('.main-nav a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mainNav.classList.remove('active');
+            });
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,822 @@
+/* =========================================
+1. CSS VARIABLES (Theme Colors)
+========================================= */
+
+:root {
+  /* Theme Colors: Champagne Gold & Soft Blush */
+  --primary-color: #084ba1; /* Champagne Gold / Tan */
+  --primary-dark: #113a77; /* Darker Gold for hover states */
+  --secondary-color: #f7edd0; /* Soft Blush/Pink Background */
+  --secondary-dark: #f7edd0; /* Slightly darker blush */
+  --accent-color: #333333; /* Charcoal for text */
+  --text-dark: #333333; /* Main text color */
+  --text-light: #666666; /* Secondary text color */
+  --white: #ffffff;
+  --black: #1a1a1a;
+  --nav-height: 80px;
+
+  /* Fonts matching Classique's style */
+  --font-heading: 'Playfair Display', serif;
+  --font-body: 'Lato', sans-serif;
+}
+
+/* =========================================
+2. GLOBAL RESET & TYPOGRAPHY
+========================================= */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--text-dark);
+  line-height: 1.6;
+  background-color: var(--white);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  color: var(--black);
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+/* SEO Note: Ensure link text is high contrast for accessibility */
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.3s ease;
+}
+
+ul {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+.container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.section {
+  padding: 80px 0;
+}
+
+.section-header {
+  margin-top: 80px;
+  margin-bottom: 5px;
+}
+
+.center-text {
+  text-align: center;
+}
+
+.mt-2 { margin-top: 2rem; }
+
+/* =========================================
+3. BUTTONS
+========================================= */
+
+.btn {
+  display: inline-block;
+  padding: 12px 30px;
+  border: 2px solid transparent;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  color: var(--white);
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-dark);
+}
+
+.btn-secondary {
+  border-color: var(--black);
+  color: var(--black);
+  background: transparent;
+}
+
+.btn-secondary:hover {
+  background-color: var(--primary-dark);
+  color: var(--white);
+}
+
+.btn-outline {
+  border-color: var(--white);
+  color: var(--white);
+}
+
+.btn-outline:hover {
+  background-color: var(--white);
+  color: var(--black);
+}
+
+.text-link {
+  color: var(--primary-color);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  border-bottom: 1px solid transparent;
+}
+
+.text-link:hover {
+  border-color: var(--primary-color);
+}
+
+/* =========================================
+4. HEADER & NAVIGATION
+========================================= */
+
+.main-header {
+  height: var(--nav-height);
+  background-color: var(--white);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;            /* Uses the full width of the browser */
+    max-width: none;        /* Removes the 1200px restriction */
+    padding: 0 40px;        /* Adds a small breathable margin on the edges */
+}
+
+.logo span {
+  color: var(--primary-color);
+}
+
+.logo {
+    display: flex;         /* Places image and text side-by-side */
+    align-items: center;    /* Vertically centers the text with the logo image */
+    gap: 12px;              /* Creates consistent space between the logo and text */
+}
+
+.logo img {
+    height: 50px;           /* Controls the size of the BB icon */
+    width: auto;
+    display: block;
+}
+
+.logo a {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--black);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    white-space: nowrap;    /* Prevents the name from wrapping to a second line */
+}
+
+.main-nav ul {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.main-nav a {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 400;
+  color: var(--text-dark);
+}
+
+.main-nav a:hover {
+  color: var(--primary-color);
+}
+
+.btn-nav {
+  padding: 8px 20px;
+  background-color: var(--black);
+  color: var(--white) !important;
+  border-radius: 2px;
+}
+
+.btn-nav:hover {
+  background-color: var(--primary-color);
+}
+
+.mobile-menu-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.mobile-menu-toggle span {
+  width: 25px;
+  height: 3px;
+  background-color: var(--black);
+}
+
+@media (max-width: 768px) {
+    /* 1. Shrink Header Height and Logo */
+    :root {
+        --nav-height: 60px; /* Reduced from 80px */
+    }
+
+    .logo img {
+        height: 35px; /* Smaller icon */
+        margin-right: 8px !important;
+    }
+
+    .logo a {
+        font-size: 1.1rem; /* Smaller text to prevent overlap */
+    }
+
+    .header-container {
+        padding: 0 15px; /* Tighten side spacing */
+    }
+
+    /* 2. Setup the Dropdown Menu Styling */
+    .main-nav {
+        display: none; /* Hidden by default */
+        position: absolute;
+        top: var(--nav-height);
+        left: 0;
+        width: 100%;
+        background-color: var(--white);
+        box-shadow: 0 10px 10px rgba(0,0,0,0.1);
+        padding: 20px 0;
+        z-index: 999;
+    }
+
+    /* This class is added by JavaScript when clicking the hamburger */
+    .main-nav.active {
+        display: block;
+    }
+
+    .main-nav ul {
+        flex-direction: column; /* Stack links vertically */
+        gap: 20px;
+        text-align: center;
+    }
+
+    .mobile-menu-toggle {
+        display: flex;
+    }
+
+    /* 3. Hero Adjustments */
+    .hero-content h1 {
+        font-size: 2.2rem;
+    }
+}
+
+/* =========================================
+5. HERO SECTION
+========================================= */
+
+.hero {
+  height: 85vh;
+  /* Placeholder catering image */
+  background-image: url('images/hero-background.jpg');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: var(--nav-height);
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  color: var(--white);
+  max-width: 800px;
+}
+
+.hero-content h1 {
+  font-size: 3.5rem;
+  line-height: 1.1;
+  margin-bottom: 20px;
+  color: var(--white);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.hero-content p {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  font-weight: 300;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+
+.hero-logo {
+    width: 100%;
+    max-width: 250px; /* Adjust this to change the size of the logo */
+    height: auto;
+    margin-bottom: 20px; /* Space between logo and button */
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    /* Optional: filter helps the logo pop if the background is dark */
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3)); 
+}
+
+@media (max-width: 768px) {
+    .hero-logo {
+        max-width: 300px;
+        margin-bottom: 30px;
+    }
+}
+
+/* =========================================
+6. INTRO / ABOUT SECTION
+========================================= */
+
+.intro-section {
+  background-color: var(--white);
+}
+
+.intro-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.section-title {
+  font-size: 2.2rem;
+  margin-bottom: 30px;
+  position: relative;
+  display: inline-block;
+}
+
+.section-title::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 3px;
+  background-color: var(--primary-color);
+  margin-top: 15px;
+}
+
+.center-text .section-title::after {
+  margin: 15px auto 0;
+}
+
+.intro-text p {
+  margin-bottom: 20px;
+  color: var(--text-light);
+}
+
+.intro-text strong {
+  color: var(--text-dark);
+}
+
+.image-placeholder {
+  width: 100%;
+  height: 400px;
+  background-color: #eee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #999;
+  border: 1px solid #ddd;
+}
+
+/* =========================================
+7. SERVICES SECTION
+========================================= */
+
+.services-section {
+  background-color: var(--secondary-color);
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+  margin-top: 50px;
+}
+
+.service-card {
+  background: var(--white);
+  padding: 40px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 4px;
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.service-icon {
+  color: var(--primary-color);
+  margin-bottom: 20px;
+}
+
+.service-icon svg {
+  width: 50px;
+  height: 50px;
+}
+
+.service-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+}
+
+.service-card p {
+  color: var(--text-light);
+  margin-bottom: 20px;
+  font-size: 0.95rem;
+}
+
+/* =========================================
+8. DIVIDER SECTION
+========================================= */
+
+.divider-section {
+  background-color: var(--black);
+  color: var(--white);
+  padding: 80px 0;
+}
+
+.divider-section h2 {
+  color: var(--white);
+  font-family: var(--font-heading);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 2rem;
+  margin: 0;
+}
+
+/* =========================================
+   9. GALLERY SECTION
+   ========================================= */
+
+/* Gallery container styling for masonry effect using CSS columns */
+#gallery-container.gallery-grid {
+    columns: 275px auto; /* Adjust min column width for more/less columns */
+    column-gap: 10px;
+    width: 100%;
+    max-width: none;
+    padding: 0 20px;
+    margin: 0;
+}
+
+/* Individual gallery item */
+.gallery-item {
+    break-inside: avoid;
+    margin-bottom: 10px;
+    page-break-inside: avoid; /* For older browsers */
+}
+
+/* Image styling */
+.gallery-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    cursor: pointer;
+}
+
+/* Modal for enlarged image */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.9);
+    padding-top: 60px;
+}
+
+.modal-content {
+    margin: auto;
+    display: block;
+    width: 80%;
+    max-width: 1200px;
+}
+
+.close {
+    position: absolute;
+    top: 15px;
+    right: 35px;
+    color: #fff;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+    color: #bbb;
+}
+
+@media (max-width: 767px) {
+    /* Force 2 columns for a masonry look instead of 1 */
+    #gallery-container.gallery-grid {
+        columns: 2 !important; 
+        column-gap: 8px !important; /* Tightens the space between columns */
+        padding: 0 10px !important; /* Reduces side margins on phone screens */
+    }
+
+    .gallery-item {
+        margin-bottom: 8px !important; /* Consistent vertical spacing */
+    }
+
+    /* Optional: Shrink the Gallery Title section slightly for mobile */
+    .gallery-section .section-title {
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+    }
+}
+
+
+/* =========================================
+10. FOOTER
+========================================= */
+
+footer {
+  background-color: var(--primary-dark);
+  color: #aaa;
+  padding: 40px 0 20px;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 40px;
+  margin-bottom: 50px;
+}
+
+.footer-col h4 {
+  color: var(--white);
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.footer-col p,
+.footer-col ul li {
+  margin-bottom: 10px;
+  font-size: 0.9rem;
+}
+
+.footer-col ul li a {
+  color: #aaa;
+}
+
+.footer-col ul li a:hover {
+  color: var(--primary-color);
+}
+
+.social-links {
+  margin-top: 20px;
+}
+
+.social-links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px; /* Creates space between the logo and "Instagram" */
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.social-links i {
+    font-size: 1.2rem; /* Makes the logo slightly larger than the text */
+    color: var(--text-light); /* Sets it to your champagne gold */
+}
+
+.social-links a:hover i {
+    color: var(--white); /* Changes icon color when you hover over the link */
+}
+
+.footer-bottom {
+  border-top: 1px solid #333;
+  padding-top: 30px;
+  text-align: center;
+  font-size: 0.8rem;
+}
+
+.footer-bottom a {
+  color: #aaa;
+}
+
+.footer-bottom a:hover {
+  color: var(--white);
+}
+
+/* =========================================
+11. RESPONSIVE DESIGN
+========================================= */
+
+@media (max-width: 768px) {
+  .main-nav {
+    display: none;
+  }
+
+  .mobile-menu-toggle {
+    display: flex;
+  }
+
+  .hero-content h1 {
+    font-size: 2.5rem;
+  }
+
+  .intro-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================================
+12. PLANNING PAGE
+========================================= */
+
+.start-planning {
+  padding: 2rem 1.5rem;
+  background: #ffffff;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+}
+
+.start-planning .container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.start-planning h1 {
+  font-size: 2.4rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.start-planning p.subtitle {
+  text-align: center;
+  color: #777;
+  margin-bottom: 2.5rem;
+}
+
+.planning-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.4fr);
+  gap: 3rem;
+}
+
+@media (max-width: 768px) {
+  .planning-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.contact-info h2 {
+  font-size: 1.2rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.contact-info p {
+  margin: 0.25rem 0;
+  color: #444;
+}
+
+.contact-info a {
+  color: inherit;
+  text-decoration: underline;
+}
+
+/* Form styles */
+.planning-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.9rem 1.2rem;
+}
+
+.planning-form .full-width {
+  grid-column: 1 / -1;
+}
+
+.planning-form input,
+.planning-form select,
+.planning-form textarea {
+  width: 100%;
+  padding: 0.8rem 0.9rem;
+  border: 1px solid #ddd;
+  border-radius: 0;
+  background: #f7f7f7;
+  font-size: 0.95rem;
+  color: #333;
+  box-sizing: border-box;
+}
+
+.planning-form textarea {
+  min-height: 150px;
+  resize: vertical;
+}
+
+.planning-form input:focus,
+.planning-form select:focus,
+.planning-form textarea:focus {
+  outline: none;
+  border-color: #000;
+  background: #fff;
+}
+
+.planning-form button {
+  grid-column: 1 / -1;
+  padding: 0.9rem 1.6rem;
+  border: none;
+  background: #000;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.planning-form button:hover {
+  background: #222;
+}
+
+
+/* =========================================
+   LIGHTBOX STYLES
+   ========================================= */
+.lightbox {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 2000;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    justify-content: center;
+    align-items: center;
+    touch-action: pan-y; /* Allows vertical scrolling/pinch-zoom but reserves horizontal for swiping */
+}
+
+.lightbox-content {
+    max-width: 90%;
+    max-height: 80vh;
+}
+
+.lightbox-content img {
+    width: 100%;
+    height: auto;
+    max-height: 80vh;
+    object-fit: contain;
+    border: 3px solid var(--white);
+}
+
+/* Navigation Buttons */
+.close-lightbox, .nav-btn {
+    position: absolute;
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    user-select: none;
+    z-index: 2001;
+}
+
+.close-lightbox { top: 20px; right: 30px; }
+.prev-btn { left: 20px; top: 50%; transform: translateY(-50%); }
+.next-btn { right: 20px; top: 50%; transform: translateY(-50%); }
+
+.close-lightbox:hover, .nav-btn:hover { color: var(--primary-color); }
+
+@media (max-width: 768px) {
+    .nav-btn { font-size: 30px; }
+    .lightbox-content { max-width: 95%; }
+}
